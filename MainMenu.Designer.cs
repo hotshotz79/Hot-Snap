@@ -94,6 +94,9 @@
             this.lnk_uabe = new System.Windows.Forms.LinkLabel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblCardSelected = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.lnk_studio = new System.Windows.Forms.LinkLabel();
+            this.lnk_github = new System.Windows.Forms.LinkLabel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -132,7 +135,6 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(984, 681);
             this.tabControl1.TabIndex = 0;
-            this.tabControl1.Click += new System.EventHandler(this.tabControl1_Click);
             // 
             // tabPage1
             // 
@@ -228,7 +230,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 59);
+            this.label2.Location = new System.Drawing.Point(6, 80);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(95, 14);
             this.label2.TabIndex = 3;
@@ -236,7 +238,7 @@
             // 
             // txtToken
             // 
-            this.txtToken.Location = new System.Drawing.Point(110, 56);
+            this.txtToken.Location = new System.Drawing.Point(110, 77);
             this.txtToken.Name = "txtToken";
             this.txtToken.Size = new System.Drawing.Size(262, 22);
             this.txtToken.TabIndex = 4;
@@ -495,6 +497,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label17);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.txtSnapLocation);
             this.groupBox3.Controls.Add(this.btnGuide);
@@ -646,7 +649,7 @@
             this.btnGuide.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnGuide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuide.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnGuide.Location = new System.Drawing.Point(378, 56);
+            this.btnGuide.Location = new System.Drawing.Point(378, 77);
             this.btnGuide.Name = "btnGuide";
             this.btnGuide.Size = new System.Drawing.Size(75, 23);
             this.btnGuide.TabIndex = 5;
@@ -656,20 +659,20 @@
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.lnk_github);
             this.groupBox7.Controls.Add(this.label14);
-            this.groupBox7.Location = new System.Drawing.Point(482, 16);
+            this.groupBox7.Location = new System.Drawing.Point(515, 16);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(486, 229);
+            this.groupBox7.Size = new System.Drawing.Size(453, 240);
             this.groupBox7.TabIndex = 2;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "GitHub Token";
             // 
             // label14
             // 
-            this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(6, 28);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(470, 182);
+            this.label14.Size = new System.Drawing.Size(433, 201);
             this.label14.TabIndex = 1;
             this.label14.Text = resources.GetString("label14.Text");
             // 
@@ -780,6 +783,7 @@
             // groupBox6
             // 
             this.groupBox6.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.groupBox6.Controls.Add(this.lnk_studio);
             this.groupBox6.Controls.Add(this.lnk_uabe);
             this.groupBox6.Controls.Add(this.label20);
             this.groupBox6.Controls.Add(this.label19);
@@ -809,9 +813,9 @@
             // 
             // label20
             // 
-            this.label20.Location = new System.Drawing.Point(525, 268);
+            this.label20.Location = new System.Drawing.Point(512, 268);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(429, 358);
+            this.label20.Size = new System.Drawing.Size(442, 358);
             this.label20.TabIndex = 2;
             this.label20.Text = resources.GetString("label20.Text");
             // 
@@ -855,6 +859,38 @@
             this.lblCardSelected.Name = "lblCardSelected";
             this.lblCardSelected.Size = new System.Drawing.Size(0, 14);
             this.lblCardSelected.TabIndex = 23;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(6, 56);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(433, 14);
+            this.label17.TabIndex = 6;
+            this.label17.Text = "Default location is ...\\SteamLibrary\\steamapps\\common\\MARVEL SNAP";
+            // 
+            // lnk_studio
+            // 
+            this.lnk_studio.AutoSize = true;
+            this.lnk_studio.Location = new System.Drawing.Point(677, 506);
+            this.lnk_studio.Name = "lnk_studio";
+            this.lnk_studio.Size = new System.Drawing.Size(32, 14);
+            this.lnk_studio.TabIndex = 4;
+            this.lnk_studio.TabStop = true;
+            this.lnk_studio.Text = "Link";
+            this.lnk_studio.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk_studio_LinkClicked);
+            // 
+            // lnk_github
+            // 
+            this.lnk_github.AutoSize = true;
+            this.lnk_github.Location = new System.Drawing.Point(204, 41);
+            this.lnk_github.Name = "lnk_github";
+            this.lnk_github.Size = new System.Drawing.Size(32, 14);
+            this.lnk_github.TabIndex = 4;
+            this.lnk_github.TabStop = true;
+            this.lnk_github.Text = "Link";
+            this.lnk_github.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk_github_LinkClicked);
             // 
             // MainMenu
             // 
@@ -961,5 +997,8 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblCardSelected;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.LinkLabel lnk_studio;
+        private System.Windows.Forms.LinkLabel lnk_github;
     }
 }

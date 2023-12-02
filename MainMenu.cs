@@ -30,9 +30,9 @@ namespace Hot_Snap
 
         private void LoadDeckList()
         {
-            if (Properties.Settings.Default.snapLocation == null)
+            if (Properties.Settings.Default.snapLocation == "")
             {
-                MessageBox.Show("Snap folder needs to be set in Settings", "Missing Snap Folder", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("Snap folder needs to be set in Settings", "Missing Snap Folder", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             string deckFolder = Properties.Settings.Default.snapLocation + @"\SNAP_Data\StreamingAssets\aa\StandaloneWindows64\MockCdn\cardbacks_assets_assets\cardbacks";
@@ -57,9 +57,9 @@ namespace Hot_Snap
 
         private void LoadCardList()
         {
-            if (Properties.Settings.Default.snapLocation == null)
+            if (Properties.Settings.Default.snapLocation == "")
             {
-                MessageBox.Show("Snap folder needs to be set in Settings", "Missing Snap Folder", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Snap folder and GitHub Token needs to be set in Settings", "Required", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -140,6 +140,11 @@ namespace Hot_Snap
             else
                 Properties.Settings.Default.capturePop = "no";
             Properties.Settings.Default.Save();
+            if (!String.IsNullOrEmpty(txtSnapLocation.Text) && !String.IsNullOrEmpty(txtToken.Text))
+            { 
+                LoadCardList();
+                LoadDeckList(); 
+            }
         }
 
         private void btnSettingsBrowse_Click(object sender, EventArgs e)
@@ -150,11 +155,6 @@ namespace Hot_Snap
             {
                 txtSnapLocation.Text = dialog_snapLoc.SelectedPath;
             }
-        }
-
-        private void tabControl1_Click(object sender, EventArgs e)
-        {
-            LoadCardList();
         }
 
         private void dgv_cards_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -186,8 +186,7 @@ namespace Hot_Snap
                 //Download the Base64 image
                 WebClient webClient = new WebClient();
                 webClient.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
-                if (String.IsNullOrEmpty(Properties.Settings.Default.token))
-                    webClient.Headers.Add(HttpRequestHeader.Authorization, "token "+ Properties.Settings.Default.token);
+                webClient.Headers.Add(HttpRequestHeader.Authorization, "token "+ Properties.Settings.Default.token);
                 webClient.Headers.Add(HttpRequestHeader.Accept, "application/octet-stream");
 
                 try
@@ -260,8 +259,7 @@ namespace Hot_Snap
             //Download Bundle File
             WebClient webClient = new WebClient();
             webClient.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
-            if (String.IsNullOrEmpty(Properties.Settings.Default.token))
-                webClient.Headers.Add(HttpRequestHeader.Authorization, "token "+ Properties.Settings.Default.token);
+            webClient.Headers.Add(HttpRequestHeader.Authorization, "token "+ Properties.Settings.Default.token);
             webClient.Headers.Add(HttpRequestHeader.Accept, "application/octet-stream");
             webClient.DownloadFile(pb.Name.Replace(".png",".bundle").ToString(), "temp.bundle");
 
@@ -459,6 +457,16 @@ namespace Hot_Snap
         private void lnk_uabe_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://github.com/hotshotz79/UABE-SnapVersion/releases");
+        }
+
+        private void lnk_studio_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/Perfare/AssetStudio/releases");
+        }
+
+        private void lnk_github_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/settings/profile");
         }
     }
 }

@@ -147,7 +147,6 @@ Humble Request:
   <data name="label14.Text" xml:space="preserve">
     <value>1. Login to GitHub
 2. Go to Settings under Profile
-(https://github.com/settings/profile)
 3. On the left menu, select Developer Settings located at the very bottom
 4. Select Personal access tokens
 5. Select Tokens (Classic)
@@ -180,23 +179,23 @@ NOTE: copy and save this token somewhere as it will not show up again</value>
 5. Save (CTRL + S), Save UABE
 6. Card ready to be viewed in game
 
--------------------
+_________________________________________________________
 
-**[Assets Info structure]**
+[Assets Info structure]
 
-**Background Layers**
+Background Layers
 
 * _Background01 &gt; main image in the back
 * _Background02 &gt; smaller image that moves around, like 'rocks/particles/etc'
 
-**Character Layer**
+Character Layer
 
 * _Foreground01 &gt; could include just legs
 * _Foreground02 &gt; could include just arms
 * _Foreground03 &gt; would include the top most layer, such as body or hair
 * _Foreground04 &gt; if a 4th layer is available, its usually an effect layer
 
-**Combo Layers**
+Combo Layers
 
 * For each layer above, theres a combo file attached with it
 * Did not learn much what is do-able with this but all i do is:
@@ -205,7 +204,7 @@ NOTE: copy and save this token somewhere as it will not show up again</value>
 * Feel free to test it out more</value>
   </data>
   <data name="label20.Text" xml:space="preserve">
-    <value>**Tips/Tricks:**
+    <value>[Tips/Tricks]
 
 * Cards_Assets_ files are the ones with parallax effects (Blue &gt; Gold &gt; ... Inifity)
 * if you want custom variants on White or Green cards, i think you need to edit "baked-basecard_assets..."
@@ -215,9 +214,9 @@ NOTE: copy and save this token somewhere as it will not show up again</value>
   iii. Replace _Foreground03_combo with a blank 'black' png 1024x1024 to replace any effects
 * if files were not backed up, go to game properties in steam and verify files to replace them
 
-**Viewing images inside the bundles**
+Viewing images inside the bundles
 
-* Download [Asset Studio](https://github.com/Perfare/AssetStudio/releases)
+* Download Asset Studio
 * Run &gt; Option &gt; Specify Unity Version
 * Enter  2021.3.19f1
 * Open any .bundle file and all images will be inside Asset List tab
