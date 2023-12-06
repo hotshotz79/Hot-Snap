@@ -35,7 +35,7 @@ namespace Hot_Snap
                 //MessageBox.Show("Snap folder needs to be set in Settings", "Missing Snap Folder", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            string deckFolder = Properties.Settings.Default.snapLocation + @"\SNAP_Data\StreamingAssets\aa\StandaloneWindows64\MockCdn\cardbacks_assets_assets\cardbacks";
+            string deckFolder = Properties.Settings.Default.snapLocation + @"\SNAP_Data\StreamingAssets\aa\StandaloneWindows64\MockCdn";
             String[] files = Directory.GetFiles(deckFolder);
             DataTable table = new DataTable();
             table.Columns.Add("Deck Name");
@@ -193,7 +193,7 @@ namespace Hot_Snap
                 {
                     for (int i = 0; i < previewContents.Count; i++)
                     {
-                        if (previewContents[i].Name.Contains(".png"))
+                        if (previewContents[i].Name.Contains(".image"))
                         {
                             if (!chk_showNsfw.Checked && previewContents[i].Name.Contains("_nsfw"))
                                 continue;
@@ -237,12 +237,12 @@ namespace Hot_Snap
 
         private void iconClicked(object sender, EventArgs e)
         {
-            //Copy the bundle to Snap Folder
+            //Hash verification
             PictureBox pb = (PictureBox)sender;
             string[] nameSplit = pb.Name.Split('_');
             string[] baseNameSplit = pb.Tag.ToString().Split('_');
 
-            if (baseNameSplit[3].ToString().Replace(".bundle", "") == nameSplit[3].ToString())
+            if (baseNameSplit[3].ToString().Replace(".bundle", "") != nameSplit[4].ToString().Replace(".image","")) //.replace (".image", "") -- change to [4] when hash added -- [5] will be nsfw
             {
                 DialogResult dialogResult = MessageBox.Show("The hash tag did not match, possibly due to variant created with older asset.\n\n" +
                     "Installing this variant might not work in game (changes can be reverted using Restore button)","Hash mismatch", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -261,7 +261,7 @@ namespace Hot_Snap
             webClient.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
             webClient.Headers.Add(HttpRequestHeader.Authorization, "token "+ Properties.Settings.Default.token);
             webClient.Headers.Add(HttpRequestHeader.Accept, "application/octet-stream");
-            webClient.DownloadFile(pb.Name.Replace(".png",".bundle").ToString(), "temp.bundle");
+            webClient.DownloadFile(pb.Name.Replace(".image",".variant").ToString(), "temp.bundle");
 
             //Convert Base64 to actual bundle
             var str = File.ReadAllText("temp.bundle");
@@ -354,9 +354,16 @@ namespace Hot_Snap
 
             try
             {
+                string[] getHash = txtBundleLoc.Text.Split('_');
+                string hashVerify = "";
+                for (int x = 0; x < getHash.Length; x++)
+                {
+                    if (getHash[x].ToString().Contains(".bundle"))
+                        hashVerify = getHash[x].ToString().Replace(".bundle","");
+                }
                 var (owner, repoName, filePath, branch) = ("hotshotz79", "HotSnap-Custom-Assets",
                     @"Variants/" + lblCardSelected.Text + "/" +
-                    DateTime.Now.ToString("yyMMdd_HHmmss") + "_" + txtVariantName.Text + "_" + Properties.Settings.Default.username,
+                    DateTime.Now.ToString("yyMMdd_HHmmss") + "_" + txtVariantName.Text + "_" + Properties.Settings.Default.username + "_" + hashVerify,
                     "main");
 
                 if (chkUploadNsfw.Checked)
@@ -365,19 +372,19 @@ namespace Hot_Snap
                 //Upload Image
                 byte[] imageArray = File.ReadAllBytes("capture.png");
                 string base64Image = Convert.ToBase64String(imageArray);
-                filePath = filePath + ".png";
+                filePath = filePath + ".image";
                 await client.Repository.Content.CreateFile(
                      owner, repoName, filePath,
                      new CreateFileRequest($"Upload Variant Image: " + lblCardSelected.Text, base64Image, branch));
 
                 byte[] bundleArray = File.ReadAllBytes(txtBundleLoc.Text);
                 string base64Bundle = Convert.ToBase64String(bundleArray);
-                filePath = filePath.Replace("png","bundle");
+                filePath = filePath.Replace(".image",".variant");
                 await client.Repository.Content.CreateFile(
                      owner, repoName, filePath,
                      new CreateFileRequest($"Upload Variant Bundle: " + lblCardSelected.Text, base64Bundle, branch));
                 File.Delete("capture.png");
-
+                
                 MessageBox.Show("Upload successful");
             }
             catch (Exception ex)
@@ -386,7 +393,7 @@ namespace Hot_Snap
             }
         }
 
-        private async void btnPatch_Click(object sender, EventArgs e)
+        private void btnPatch_Click(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(Properties.Settings.Default.snapLocation))
             {
@@ -467,6 +474,11 @@ namespace Hot_Snap
         private void lnk_github_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://github.com/settings/profile");
+        }
+
+        private void lnk_netRuntime_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://aka.ms/dotnet-core-applaunch?missing_runtime=true&arch=x64&rid=win10-x64&apphost_version=6.0.11");
         }
     }
 }

@@ -117,32 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="dialog_snapLoc.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="diag_fileUpload.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>153, 17</value>
-  </metadata>
   <data name="label7.Text" xml:space="preserve">
     <value>- GitHub Token required to upload
 - Go to Settings tab to set it up
 
 - Screenshot Capture works by having the game running behind this application
 - Game needs to be running in Full Screen mode (ALT+Enter)</value>
-  </data>
-  <data name="label9.Text" xml:space="preserve">
-    <value>Developer: Hotshotz79
-
-Future Updates:
-
-* File hash/version check
-* Offline mode
-* Full Deck view
-
-Humble Request:
-
-* Please do not upload variants of existing art in-game.
-* Support the game by purchasing those in-game.</value>
   </data>
   <data name="label14.Text" xml:space="preserve">
     <value>1. Login to GitHub
@@ -158,21 +138,24 @@ Humble Request:
 
 NOTE: copy and save this token somewhere as it will not show up again</value>
   </data>
-  <data name="label18.Text" xml:space="preserve">
-    <value>1. Download and run UABE Snap Version 
-2. Click Open (or Drag and Drop) a bundle file
-   
-   a. All bundles are located under in the following folder:
-   \steamapps\common\MARVEL SNAP\SNAP_Data\
-   StreamingAssets\aa\StandaloneWindows64\MockCdn
-   
-   b. File name starts with "cards assets" and any file with tag _01, 
-   _02, upto _20 is a variant card
-   
-   c. For this guide, will use Invisible Woman (cards_assets
-   _invisiblewoman_faef9ca841aec5578755603763f3ef7a.bundle)
+  <data name="label20.Text" xml:space="preserve">
+    <value>[Tips/Tricks]
 
-3. In the Assets Info, select the texture you want to replace</value>
+* Cards_Assets_ files are the ones with parallax effects (Blue &gt; Gold &gt; ... Inifity)
+* if you want custom variants on White or Green cards, i think you need to edit "baked-basecard_assets..."
+* The technique I use to make variants is:
+  i. Replace _Foreground 01 and 02 with a blank transparent png 1024x1024
+  ii. Replace _Foreground 03 with the texture I want
+  iii. Replace _Foreground03_combo with a blank 'black' png 1024x1024 to replace any effects
+* if files were not backed up, go to game properties in steam and verify files to replace them
+
+Viewing images inside the bundles
+
+* Download Asset Studio
+* Run &gt; Option &gt; Specify Unity Version
+* Enter  2021.3.19f1
+* Open any .bundle file and all images will be inside Asset List tab
+</value>
   </data>
   <data name="label19.Text" xml:space="preserve">
     <value>4. Click Edit Texture then Load
@@ -203,25 +186,112 @@ Combo Layers
   b. color areas purple that needs to 'Frame-Break' 
 * Feel free to test it out more</value>
   </data>
-  <data name="label20.Text" xml:space="preserve">
-    <value>[Tips/Tricks]
+  <data name="label18.Text" xml:space="preserve">
+    <value>1. Download and run UABE Snap Version 
+2. Click Open (or Drag and Drop) a bundle file
+   
+   a. All bundles are located under in the following folder:
+   \steamapps\common\MARVEL SNAP\SNAP_Data\
+   StreamingAssets\aa\StandaloneWindows64\MockCdn
+   
+   b. File name starts with "cards assets" and any file with tag _01, 
+   _02, upto _20 is a variant card
+   
+   c. For this guide, will use Invisible Woman (cards_assets
+   _invisiblewoman_faef9ca841aec5578755603763f3ef7a.bundle)
 
-* Cards_Assets_ files are the ones with parallax effects (Blue &gt; Gold &gt; ... Inifity)
-* if you want custom variants on White or Green cards, i think you need to edit "baked-basecard_assets..."
-* The technique I use to make variants is:
-  i. Replace _Foreground 01 and 02 with a blank transparent png 1024x1024
-  ii. Replace _Foreground 03 with the texture I want
-  iii. Replace _Foreground03_combo with a blank 'black' png 1024x1024 to replace any effects
-* if files were not backed up, go to game properties in steam and verify files to replace them
+3. In the Assets Info, select the texture you want to replace</value>
+  </data>
+  <data name="label9.Text" xml:space="preserve">
+    <value>Developer: Hotshotz79
+Thanks to Padjokel
 
-Viewing images inside the bundles
+Future Updates:
 
-* Download Asset Studio
-* Run &gt; Option &gt; Specify Unity Version
-* Enter  2021.3.19f1
-* Open any .bundle file and all images will be inside Asset List tab
+* File hash/version check
+* Offline mode
+* Full Deck view
+
+Humble Request:
+
+* Please do not upload variants of existing art in-game.
+* Support the game by purchasing those in-game.</value>
+  </data>
+  <metadata name="imgList_icons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>289, 17</value>
+  </metadata>
+  <data name="imgList_icons.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACm
+        DQAAAk1TRnQBSQFMAgEBBQEAARgBAAEYAQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        AwABQAMAASADAAEBAQABCAYAAQgYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
+        AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
+        AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
+        AWYDAAGZAwABzAIAATMDAAIzAgABMwFmAgABMwGZAgABMwHMAgABMwH/AgABZgMAAWYBMwIAAmYCAAFm
+        AZkCAAFmAcwCAAFmAf8CAAGZAwABmQEzAgABmQFmAgACmQIAAZkBzAIAAZkB/wIAAcwDAAHMATMCAAHM
+        AWYCAAHMAZkCAALMAgABzAH/AgAB/wFmAgAB/wGZAgAB/wHMAQABMwH/AgAB/wEAATMBAAEzAQABZgEA
+        ATMBAAGZAQABMwEAAcwBAAEzAQAB/wEAAf8BMwIAAzMBAAIzAWYBAAIzAZkBAAIzAcwBAAIzAf8BAAEz
+        AWYCAAEzAWYBMwEAATMCZgEAATMBZgGZAQABMwFmAcwBAAEzAWYB/wEAATMBmQIAATMBmQEzAQABMwGZ
+        AWYBAAEzApkBAAEzAZkBzAEAATMBmQH/AQABMwHMAgABMwHMATMBAAEzAcwBZgEAATMBzAGZAQABMwLM
+        AQABMwHMAf8BAAEzAf8BMwEAATMB/wFmAQABMwH/AZkBAAEzAf8BzAEAATMC/wEAAWYDAAFmAQABMwEA
+        AWYBAAFmAQABZgEAAZkBAAFmAQABzAEAAWYBAAH/AQABZgEzAgABZgIzAQABZgEzAWYBAAFmATMBmQEA
+        AWYBMwHMAQABZgEzAf8BAAJmAgACZgEzAQADZgEAAmYBmQEAAmYBzAEAAWYBmQIAAWYBmQEzAQABZgGZ
+        AWYBAAFmApkBAAFmAZkBzAEAAWYBmQH/AQABZgHMAgABZgHMATMBAAFmAcwBmQEAAWYCzAEAAWYBzAH/
+        AQABZgH/AgABZgH/ATMBAAFmAf8BmQEAAWYB/wHMAQABzAEAAf8BAAH/AQABzAEAApkCAAGZATMBmQEA
+        AZkBAAGZAQABmQEAAcwBAAGZAwABmQIzAQABmQEAAWYBAAGZATMBzAEAAZkBAAH/AQABmQFmAgABmQFm
+        ATMBAAGZATMBZgEAAZkBZgGZAQABmQFmAcwBAAGZATMB/wEAApkBMwEAApkBZgEAA5kBAAKZAcwBAAKZ
+        Af8BAAGZAcwCAAGZAcwBMwEAAWYBzAFmAQABmQHMAZkBAAGZAswBAAGZAcwB/wEAAZkB/wIAAZkB/wEz
+        AQABmQHMAWYBAAGZAf8BmQEAAZkB/wHMAQABmQL/AQABzAMAAZkBAAEzAQABzAEAAWYBAAHMAQABmQEA
+        AcwBAAHMAQABmQEzAgABzAIzAQABzAEzAWYBAAHMATMBmQEAAcwBMwHMAQABzAEzAf8BAAHMAWYCAAHM
+        AWYBMwEAAZkCZgEAAcwBZgGZAQABzAFmAcwBAAGZAWYB/wEAAcwBmQIAAcwBmQEzAQABzAGZAWYBAAHM
+        ApkBAAHMAZkBzAEAAcwBmQH/AQACzAIAAswBMwEAAswBZgEAAswBmQEAA8wBAALMAf8BAAHMAf8CAAHM
+        Af8BMwEAAZkB/wFmAQABzAH/AZkBAAHMAf8BzAEAAcwC/wEAAcwBAAEzAQAB/wEAAWYBAAH/AQABmQEA
+        AcwBMwIAAf8CMwEAAf8BMwFmAQAB/wEzAZkBAAH/ATMBzAEAAf8BMwH/AQAB/wFmAgAB/wFmATMBAAHM
+        AmYBAAH/AWYBmQEAAf8BZgHMAQABzAFmAf8BAAH/AZkCAAH/AZkBMwEAAf8BmQFmAQAB/wKZAQAB/wGZ
+        AcwBAAH/AZkB/wEAAf8BzAIAAf8BzAEzAQAB/wHMAWYBAAH/AcwBmQEAAf8CzAEAAf8BzAH/AQAC/wEz
+        AQABzAH/AWYBAAL/AZkBAAL/AcwBAAJmAf8BAAFmAf8BZgEAAWYC/wEAAf8CZgEAAf8BZgH/AQAC/wFm
+        AQABIQEAAaUBAANfAQADdwEAA4YBAAOWAQADywEAA7IBAAPXAQAD3QEAA+MBAAPqAQAD8QEAA/gBAAHw
+        AfsB/wEAAaQCoAEAA4ADAAH/AgAB/wMAAv8BAAH/AwAB/wEAAf8BAAL/AgAD/wMAAfQBuwq6Af8yAAH/
+        AbMKuwEJAf8yAAH0AbMBCQrxMwAB/wGQC7MB/zIAAf8BiwGQCrkB/zIAAf8BiwGQA7kEswO5Af8yAAH/
+        AYsBkAK5BrMCuQH/MgAB/wGLAZACuQazArkB/zIAAf8BiwGQA7kB2wH/AdwEuQH/MgAB/wGLAZADuQHb
+        Af8FuQH/MgAB/wGLAZAEuQH/AdsEuQH/MgAB/wGLAZADuQHcAf8B3AS5Af8yAAH/AYsBkAS5AdsFuQH/
+        MgAB/wGLAZAEuQHbARkEuQH/MgAB/wGLAZAFuQHbBLkB/zMAAfQKuwHcAf80AAH/AfMCuwL/AbsBtQHy
+        Af8FAAHxAQcCkwH3Ae8BkwEcAu8BvAYAAq8B0AHPAeYC1gHdAdAIAAH0AQgBeAJWAXgBCAH0BwAB8gO0
+        ArsDrgHxBQABbQFEAkwBSwFKAksBSgERARUFAAG2AcsB0QHJAcgB5gHdAtcCygUAAf8BCAhWAQgB/wUA
+        AfMEtASuAfMFAAHtAUsDUQFzAXQBUQFSAVEBEgUAAbABygHRAckByAHWAd0B1gHXAsoEAAH/AZgKVgGY
+        Af8BAAH/AfIB8wG7A7QBtQK0Aq4BuwHzAfEB/wIAAe8BcwFtAewBEwHrAXICSgFyAesFAAGvAckB1gHm
+        AcgB3QH0AdYB0AHJAc8EAAGYBVYCGwVWAQgBAAHzBLQDuwK1AbQBkQOuAfICAAGSAW0B6wGSAbQBkQFm
+        AQ8BZgKRBQABrwHEAdAC5gEZAQkB1gHmAcgBqAMAAfMGlwH0AfMGVgH0AbsDtAK7AfAC9AG8AbUBtAOu
+        AbUCAAHsARIB6wHsAQkBkQJmAWwCkQUAAa4BqAHXAeYByAHVAc4BpwHVAckBjAMAAZgGlwL0BlYBCAEH
+        A7QBuwHwBAABvAG1AbQCrgG7AgABkgHrAWwBkQHvAQkBbAFLAe0BugGRBQABrgHPA7UB3QEJAbUB8AHW
+        AYYDAAWXAXgBlwL0ApcEVgF4Af8BuwG0AbUBuwH0BAAB9AG1AbQBrgG7Af8CAAGSAewBkQFsAewB7wFu
+        AXQB7wG0AZEFAAHPAacCtQHdAfIDvAHxAa4DAASXAXgB/wHCAvYBwgH/AZcEVgH/AbsBtAG1AbsB9AQA
+        AfQBtQG0Aa4BuwH/AgAB7QGLAWwBFAFDARQBcwFLApEBkgUAAc8B5gHdAa8B3QK8AfABvAHdAa4DAAWX
+        ARsE/wEbBVYBuwO0AbsB8AQAAbwBtQG0Aq4BuwIAAfcBrgETAe8B7AHqA20CkQUAAdAB5gH/Ad0C1gG1
+        AbYB8gHdAYwDAAaXAcIC/wEbApcDVgF4AbsDtAK7AfAC9AG8AbUBtAOuAbUCAAMJAbsB6wF0Ae8BBwGR
+        AZABkQUAAdYByQHXAtYB3QG2AagB1gHXAacDAAGYBpcCCAOXA1YBCAHzBLQDuwK1AbQBkQOuAfICAAEJ
+        AbsB7QGRAXEB6gHvAQkBtQKQBQABtQHEAagB5gTWAd0ByQGGAwAB8wOXAQgGwgEIA1YB9AH/AfIB8wG7
+        A7QBtQK0Aq4BuwHzAfEB/wIAAZIBkQGLAWwCkAHvAbsB9wKQBQABrgEEAYYCyAHmAdAB1QHWAcQBZgQA
+        AXgBlwF4CP8BlwFWAQgEAAHzBLQErgHzBQAB7QRsAZABuwG0ApEBbAUAAa4BXwEEAUIBpwHmAdACyAEE
+        AWYEAAH/AXgBlwh4AVYBmAH/BAAB8gO0ArsDrgHxBQAB6wEVBGwBuwGQAYsCbAUAAbUBCgFfAqEBpwHI
+        AaEBhQFfAWAFAAH/AXgIlwGZAf8FAAH/AfMBuwEHAv8BuwG1AfIB/wUAAQcF7AGSAZEC7AH3BQAB/wLs
+        Aa4BzwGvAbUBzwGuAewB9AcAAfMBmASXAZgB8wQAAUIBTQE+BwABPgMAASgDAAFAAwABIAMAAQEBAAEB
+        BgABARYAA/8BAAHAAQEGAAGAAQEGAAGAAQMGAAGAAQEGAAGAAQEGAAGAAQEGAAGAAQEGAAGAAQEGAAGA
+        AQEGAAGAAQEGAAGAAQEGAAGAAQEGAAGAAQEGAAGAAQEGAAGAAQEGAAHAAQEGAAHgAQcBwAEHAeABDwHw
+        AQ8B4AEHAcABBwHAAQcBwAEDAeABBwHAAQcBwAEHAYABAQIAAcABBwHAAQcBgAEBAgABwAEHAcABBwQA
+        AcABBwHAAQcCAAEDAsABBwHAAQcCAAEDAsABBwHAAQcCAAEDAsABBwHAAQcCAAEDAsABBwHAAQcEAAHA
+        AQcBwAEHBAABwAEHAcABBwQAAcABBwHAAQcBgAEBAeABBwHAAQcBwAEHAYABAQHgAQcBwAEHAcABBwHA
+        AQMB4AEHAcABBwHAAQcB8AEPCw==
 </value>
   </data>
+  <metadata name="dialog_snapLoc.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="diag_fileUpload.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>153, 17</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
