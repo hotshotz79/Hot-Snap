@@ -72,7 +72,7 @@ ____
 
 # Future Enhancements
 
-* Go to [Projects](https://github.com/hotshotz79/NX-Game-Icon-Customizer/projects/1) section
+* Go to [Projects](https://github.com/users/hotshotz79/projects/2) section
 ____
 
 # Support
