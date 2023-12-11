@@ -100,6 +100,11 @@
             this.imgList_icons = new System.Windows.Forms.ImageList(this.components);
             this.dialog_snapLoc = new System.Windows.Forms.FolderBrowserDialog();
             this.diag_fileUpload = new System.Windows.Forms.OpenFileDialog();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_cards)).BeginInit();
@@ -117,6 +122,8 @@
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -462,6 +469,7 @@
             this.btnReset.TabIndex = 15;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // groupBox1
             // 
@@ -529,6 +537,7 @@
             this.btnBrowseScreenshot.TabIndex = 2;
             this.btnBrowseScreenshot.Text = "Browse";
             this.btnBrowseScreenshot.UseVisualStyleBackColor = false;
+            this.btnBrowseScreenshot.Click += new System.EventHandler(this.btnBrowseScreenshot_Click);
             // 
             // btnCapture
             // 
@@ -546,6 +555,7 @@
             // 
             // pic_upload
             // 
+            this.pic_upload.BackColor = System.Drawing.SystemColors.Control;
             this.pic_upload.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pic_upload.Location = new System.Drawing.Point(40, 156);
             this.pic_upload.Name = "pic_upload";
@@ -659,11 +669,14 @@
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.tabPage4.Controls.Add(this.label21);
+            this.tabPage4.Controls.Add(this.pictureBox2);
             this.tabPage4.Controls.Add(this.groupBox2);
             this.tabPage4.Controls.Add(this.groupBox5);
             this.tabPage4.Controls.Add(this.btnSettingsSave);
             this.tabPage4.Controls.Add(this.groupBox4);
             this.tabPage4.Controls.Add(this.groupBox3);
+            this.tabPage4.Controls.Add(this.pictureBox1);
             this.tabPage4.ImageIndex = 0;
             this.tabPage4.Location = new System.Drawing.Point(4, 30);
             this.tabPage4.Name = "tabPage4";
@@ -674,10 +687,12 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.groupBox2.Controls.Add(this.linkLabel2);
+            this.groupBox2.Controls.Add(this.linkLabel1);
             this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Location = new System.Drawing.Point(478, 15);
+            this.groupBox2.Location = new System.Drawing.Point(780, 207);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(364, 299);
+            this.groupBox2.Size = new System.Drawing.Size(188, 397);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "About";
@@ -686,15 +701,17 @@
             // 
             this.label9.Location = new System.Drawing.Point(6, 23);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(325, 212);
+            this.label9.Size = new System.Drawing.Size(176, 371);
             this.label9.TabIndex = 11;
-            this.label9.Text = resources.GetString("label9.Text");
+            this.label9.Text = "Developer: Hotshotz79\r\n\r\nQA / Support: Padjokel\r\n\r\n\r\n\r\n\r\n\r\nHumble Request:\r\n\r\n* P" +
+    "lease do not upload variants of existing art in-game.\r\n\r\n* Support the game by p" +
+    "urchasing those in-game.";
             // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.chk_skipCaptureMsg);
             this.groupBox5.Controls.Add(this.chk_showNsfw);
-            this.groupBox5.Location = new System.Drawing.Point(8, 320);
+            this.groupBox5.Location = new System.Drawing.Point(8, 512);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(464, 92);
             this.groupBox5.TabIndex = 9;
@@ -727,7 +744,7 @@
             this.btnSettingsSave.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnSettingsSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettingsSave.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnSettingsSave.Location = new System.Drawing.Point(397, 418);
+            this.btnSettingsSave.Location = new System.Drawing.Point(397, 610);
             this.btnSettingsSave.Name = "btnSettingsSave";
             this.btnSettingsSave.Size = new System.Drawing.Size(75, 25);
             this.btnSettingsSave.TabIndex = 6;
@@ -741,7 +758,7 @@
             this.groupBox4.Controls.Add(this.lnk_netRuntime);
             this.groupBox4.Controls.Add(this.label13);
             this.groupBox4.Controls.Add(this.label12);
-            this.groupBox4.Location = new System.Drawing.Point(8, 157);
+            this.groupBox4.Location = new System.Drawing.Point(8, 349);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(464, 157);
             this.groupBox4.TabIndex = 8;
@@ -807,7 +824,7 @@
             this.groupBox3.Controls.Add(this.btnSettingsBrowse);
             this.groupBox3.Controls.Add(this.txtToken);
             this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Location = new System.Drawing.Point(8, 15);
+            this.groupBox3.Location = new System.Drawing.Point(8, 207);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(464, 136);
             this.groupBox3.TabIndex = 7;
@@ -925,6 +942,60 @@
             this.diag_fileUpload.DefaultExt = "bundle";
             this.diag_fileUpload.Filter = "Cards|cards_assets*.bundle";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(472, 207);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(305, 374);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 12;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(4, 4);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(964, 197);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 13;
+            this.pictureBox2.TabStop = false;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label21.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label21.Location = new System.Drawing.Point(487, 612);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(281, 18);
+            this.label21.TabIndex = 14;
+            this.label21.Text = "Ongoing: Developer of Hot SNAP!";
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(6, 82);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(49, 14);
+            this.linkLabel1.TabIndex = 12;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "GitHub";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // linkLabel2
+            // 
+            this.linkLabel2.AutoSize = true;
+            this.linkLabel2.Location = new System.Drawing.Point(6, 104);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(53, 14);
+            this.linkLabel2.TabIndex = 13;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Text = "Discord";
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -933,7 +1004,7 @@
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainMenu";
-            this.Text = "Hot SNAP! (v0.2)";
+            this.Text = "Hot SNAP! (v0.3)";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_cards)).EndInit();
@@ -952,13 +1023,17 @@
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1035,5 +1110,10 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }
