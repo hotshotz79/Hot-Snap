@@ -73,13 +73,6 @@ ____
 # Future Enhancements
 
 * Go to [Projects](https://github.com/users/hotshotz79/projects/2) section
-____
-
-# Support
-
-If you like this app and wish to see more updates, features and enhancements, motivate me below:
-<br><br>
-[![Ko-Fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://link)
 
 ____
 
