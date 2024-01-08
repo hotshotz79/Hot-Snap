@@ -37,7 +37,7 @@
     </StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>easy%281%29.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\image.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Octokit, Version=9.0.0.0, Culture=neutral, PublicKeyToken=0be8860aee462442, processorArchitecture=MSIL">
@@ -105,7 +105,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\image.ico" />
+    <None Include="bin\Debug\nsfw.png" />
     <Content Include="easy%281%29.ico" />
+    <None Include="Resources\HotSnap.ico" />
     <None Include="Resources\HulkThing_FistBump.png" />
     <None Include="Resources\Uploaded_Thanos.png" />
     <None Include="Resources\Thanos_Snap.png" />

@@ -29,33 +29,88 @@ namespace Hot_Snap
             LoadDeckList();
         }
 
-        private void LoadDeckList()
+        private async void LoadDeckList()
         {
             if (Properties.Settings.Default.snapLocation == "")
             {
                 //MessageBox.Show("Snap folder needs to be set in Settings", "Missing Snap Folder", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            string deckFolder = Properties.Settings.Default.snapLocation + @"\SNAP_Data\StreamingAssets\aa\StandaloneWindows64\MockCdn";
-            //String[] files = Directory.GetFiles(deckFolder);
-            String[] files = Directory.GetFiles(deckFolder, "cardbacks_assets_*", SearchOption.TopDirectoryOnly);
-            DataTable table = new DataTable();
-            table.Columns.Add("Deck Name");
-            table.Columns.Add("File Name");
 
-            for (int i = 0; i < files.Length; i++)
+            //Connect to GitHub
+            var client = new GitHubClient(new ProductHeaderValue("HotSnap"));
+
+            var tokenAuth = new Credentials(Properties.Settings.Default.token);
+            client.Credentials = tokenAuth;
+
+            //Populate the list only if it exists on the repository
+            try
             {
-                FileInfo file = new FileInfo(files[i]);
-                DataRow dr = table.NewRow();
-                string[] name = file.Name.Split('_');
-                //dr[0] = name[0] + "_" + name[1]; //file.Name.Split('_').First();
-                dr[0] = file.Name.Replace("cardbacks_assets_", "").Split('_').First();
-                dr[1] = file.Name;
-                table.Rows.Add(dr);
+                //Define GitHub [Account] > [Repo] > [Folder]
+                var previewContents = await client
+                .Repository
+                .Content
+                .GetAllContents("hotshotz79", "HotSnap-Custom-Assets", @"Cardbacks");
+
+                //Download the Base64 image
+                WebClient webClient = new WebClient();
+                webClient.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+                webClient.Headers.Add(HttpRequestHeader.Authorization, "token "+ Properties.Settings.Default.token);
+                webClient.Headers.Add(HttpRequestHeader.Accept, "application/octet-stream");
+
+                string snapFolder = Properties.Settings.Default.snapLocation + @"\SNAP_Data\StreamingAssets\aa\StandaloneWindows64\MockCdn";
+                bool skip = false;
+                //String[] files = Directory.GetFiles(snapFolder, "cards_assets_*", SearchOption.TopDirectoryOnly);
+                //DataTable table = new DataTable();
+                //table.Columns.Add("Card Name");
+                //table.Columns.Add("File Name");
+
+                string deckFolder = Properties.Settings.Default.snapLocation + @"\SNAP_Data\StreamingAssets\aa\StandaloneWindows64\MockCdn";
+
+                String[] files = Directory.GetFiles(deckFolder, "cardbacks_assets_*", SearchOption.TopDirectoryOnly);
+                DataTable table = new DataTable();
+                table.Columns.Add("Deck Name");
+                table.Columns.Add("File Name");
+
+                for (int x = 0; x < previewContents.Count; x++)
+                {
+                    if (previewContents[x].Type == "dir")
+                    {
+                        for (int i = 0; i < files.Length; i++)
+                        {
+                            skip = false;
+                            FileInfo file = new FileInfo(files[i]);
+
+                            string[] name = file.Name.Split('_');
+
+                            if (name[2] == previewContents[x].Name)
+                            {
+                                DataRow dr = table.NewRow();
+                                dr[0] = file.Name.Replace("cardbacks_assets_", "").Split('_').First();
+                                dr[1] = file.Name;
+                                table.Rows.Add(dr);
+                            }
+                        }
+                    }
+                }
+                /*for (int i = 0; i < files.Length; i++)
+                {
+                    FileInfo file = new FileInfo(files[i]);
+                    DataRow dr = table.NewRow();
+                    string[] name = file.Name.Split('_');
+                    dr[0] = file.Name.Replace("cardbacks_assets_", "").Split('_').First();
+                    dr[1] = file.Name;
+
+                    table.Rows.Add(dr);
+                }*/
+                dgv_decks.DataSource = table;
+                dgv_decks.Columns[1].Visible = false;
+                dgv_decks.Columns[0].Width = 120;
             }
-            dgv_decks.DataSource = table;
-            dgv_decks.Columns[1].Visible = false;
-            dgv_decks.Columns[0].Width = 120;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private async void LoadCardList()
@@ -102,11 +157,13 @@ namespace Hot_Snap
                         {
                             skip = false;
                             FileInfo file = new FileInfo(files[i]);
-                            //Skip if variant name
+                            //Skip certain cards (such as Nico Robins spells)
                             if (file.Name.Contains("spell0"))
                                 continue;
                             //Console.WriteLine(file.Name + " | " + previewContents[x].Name);
-                            if (file.Name.Contains(previewContents[x].Name))
+                            string[] name = file.Name.Split('_');
+                            
+                            if (name[2] == previewContents[x].Name)
                             {
                                 for (int j = 1; j < 21; j++)
                                 {
@@ -139,49 +196,6 @@ namespace Hot_Snap
                     }
                 }
 
-                /*
-                string snapFolder = Properties.Settings.Default.snapLocation + @"\SNAP_Data\StreamingAssets\aa\StandaloneWindows64\MockCdn";
-                bool skip = false;
-                String[] files = Directory.GetFiles(snapFolder, "cards_assets_*", SearchOption.TopDirectoryOnly);
-                DataTable table = new DataTable();
-                table.Columns.Add("Card Name");
-                table.Columns.Add("File Name");
-
-                for (int i = 0; i < files.Length; i++)
-                {
-                    skip = false;
-                    FileInfo file = new FileInfo(files[i]);
-                    //Skip if variant
-                    if (file.Name.Contains("testcard") || file.Name.Contains("zzz"))
-                        continue;
-                    for (int j = 1; j < 21; j++)
-                    {
-                        if (j < 10)
-                        {
-                            if (file.Name.Contains("_0" + j + "_"))
-                            {
-                                skip = true;
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            if (file.Name.Contains("_" + j + "_"))
-                            {
-                                skip = true;
-                                break;
-                            }
-                        }
-                    }
-                    if (!skip)
-                    {
-                        DataRow dr = table.NewRow();
-                        dr[0] = file.Name.Replace("cards_assets_", "").Split('_').First();
-                        dr[1] = file.Name;
-                        table.Rows.Add(dr);
-                    }
-                }
-                */
                 dgv_cards.DataSource = table;
                 dgv_cards.Columns[1].Visible = false;
                 dgv_cards.Columns[0].Width = 120;
@@ -251,10 +265,10 @@ namespace Hot_Snap
             lblNoVariants.Visible = false;
             lblInstalled.Visible = false;
             lblDblClick.Visible = false;
-            RetrievePreview();
+            RetrievePreview(@"Variants/", dgv_cards);
         }
 
-        private async void RetrievePreview()
+        private async void RetrievePreview(string folder, DataGridView dgv)
         {
 
             //Connect to GitHub
@@ -269,7 +283,7 @@ namespace Hot_Snap
                 var previewContents = await client
                 .Repository
                 .Content
-                .GetAllContents("hotshotz79", "HotSnap-Custom-Assets", @"Variants/" + dgv_cards.CurrentRow.Cells[0].Value.ToString());
+                .GetAllContents("hotshotz79", "HotSnap-Custom-Assets", folder + dgv.CurrentRow.Cells[0].Value.ToString());
 
                 //Download the Base64 image
                 WebClient webClient = new WebClient();
@@ -283,14 +297,31 @@ namespace Hot_Snap
                     {
                         if (previewContents[i].Name.Contains(".image"))
                         {
-                            if (!chk_showNsfw.Checked && previewContents[i].Name.Contains("_nsfw"))
-                                continue;
+                            //if (!chk_showNsfw.Checked && previewContents[i].Name.Contains("_nsfw"))
+                                //continue;
+                            var img = Image.FromFile("nsfw.png");
 
-                            webClient.DownloadFile(previewContents[i].DownloadUrl, "temp.png");
+                            if (chk_showNsfw.Checked)
+                            {
+                                //Convert Base64 to actual image
+                                webClient.DownloadFile(previewContents[i].DownloadUrl, "temp.png");
+                                var str = File.ReadAllText("temp.png");
 
-                            //Convert Base64 to actual image
-                            var str = File.ReadAllText("temp.png");
-                            var img = Image.FromStream(new MemoryStream(Convert.FromBase64String(str)));
+                                img = Image.FromStream(new MemoryStream(Convert.FromBase64String(str)));
+                            }
+                            else
+                            {
+                                if (previewContents[i].Name.Contains("_nsfw"))
+                                    img = Image.FromFile("nsfw.png");
+                                else
+                                {
+                                    //Convert Base64 to actual image
+                                    webClient.DownloadFile(previewContents[i].DownloadUrl, "temp.png");
+                                    var str = File.ReadAllText("temp.png");
+
+                                    img = Image.FromStream(new MemoryStream(Convert.FromBase64String(str)));
+                                }
+                            }
 
                             //Populate Flow Layout
                             PictureBox pbCard = new PictureBox();
@@ -301,8 +332,10 @@ namespace Hot_Snap
                             pbCard.SizeMode = PictureBoxSizeMode.StretchImage;
                             pbCard.BorderStyle = BorderStyle.FixedSingle;
                             pbCard.DoubleClick += new EventHandler(iconClicked);
-                            flow_variants.Controls.Add(pbCard);
-
+                            if (folder.Contains("Variant"))
+                                flow_variants.Controls.Add(pbCard);
+                            else
+                                flow_deck.Controls.Add(pbCard);
                         }
                     }
                 }
@@ -407,6 +440,10 @@ namespace Hot_Snap
         {
             lblCardSelected.Text = "";
             diag_fileUpload.InitialDirectory = Properties.Settings.Default.snapLocation + @"\SNAP_Data\StreamingAssets\aa\StandaloneWindows64\MockCdn";
+            if (radVariant.Checked)
+                diag_fileUpload.Filter = "Variants|cards_assets*.bundle";
+            if (radDeck.Checked)
+                diag_fileUpload.Filter = "CardBacks|cardbacks*.bundle";
 
             DialogResult result = diag_fileUpload.ShowDialog();
             
@@ -414,7 +451,7 @@ namespace Hot_Snap
             {
                 //Check if base card is selected
                 string[] cardSelectedName = diag_fileUpload.SafeFileName.Split('_');
-                if (cardSelectedName.Count() > 4)
+                if (radVariant.Checked && cardSelectedName.Count() > 4)
                 {
                     MessageBox.Show("Selected bundle is not a 'Base' card.\n\nCurrent version of this tool does not support customization of variant assets (file name tagged with 01-20).", "Base Asset Only", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -466,6 +503,12 @@ namespace Hot_Snap
                     DateTime.Now.ToString("yyMMdd_HHmmss") + "_" + txtVariantName.Text + "_" + Properties.Settings.Default.username + "_" + hashVerify,
                     "main");
 
+                if (radDeck.Checked)
+                {
+                    filePath = @"Cardbacks/" + lblCardSelected.Text + "/" +
+                    DateTime.Now.ToString("yyMMdd_HHmmss") + "_" + txtVariantName.Text + "_" + Properties.Settings.Default.username + "_" + hashVerify;
+                }
+
                 if (chkUploadNsfw.Checked)
                     filePath = filePath + "_nsfw";
 
@@ -475,17 +518,24 @@ namespace Hot_Snap
                 filePath = filePath + ".image";
                 await client.Repository.Content.CreateFile(
                      owner, repoName, filePath,
-                     new CreateFileRequest($"Upload Variant Image: " + lblCardSelected.Text, base64Image, branch));
+                     new CreateFileRequest($"Upload Image: " + lblCardSelected.Text, base64Image, branch));
 
                 byte[] bundleArray = File.ReadAllBytes(txtBundleLoc.Text);
                 string base64Bundle = Convert.ToBase64String(bundleArray);
                 filePath = filePath.Replace(".image",".variant");
                 await client.Repository.Content.CreateFile(
                      owner, repoName, filePath,
-                     new CreateFileRequest($"Upload Variant Bundle: " + lblCardSelected.Text, base64Bundle, branch));
+                     new CreateFileRequest($"Upload Bundle: " + lblCardSelected.Text, base64Bundle, branch));
                 File.Delete("capture.png");
-                
-                MessageBox.Show("Upload successful");
+
+                //MessageBox.Show("Upload successful");
+                var mm = new MainMenu();
+                Point mouse_pt = new Point(MousePosition.X, MousePosition.Y-200);
+                Message frmMessage = new Message(Properties.Resources.Uploaded_Thanos);
+                frmMessage.StartPosition = FormStartPosition.Manual;
+                frmMessage.Location = mouse_pt;
+                frmMessage.ShowDialog();
+
                 ResetUpload();
             }
             catch (Exception ex)
@@ -559,7 +609,7 @@ namespace Hot_Snap
             lblNoVariants.Visible = false;
             lblInstalled.Visible = false;
             lblDblClick.Visible = false;
-            RetrievePreview();
+            RetrievePreview(@"Variants/", dgv_cards);
         }
 
         private void lnk_uabe_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -585,12 +635,7 @@ namespace Hot_Snap
         private void btnBrowseScreenshot_Click(object sender, EventArgs e)
         {
             //TODO
-            var mm = new MainMenu();
-            Point mouse_pt = new Point(MousePosition.X, MousePosition.Y-200);
-            Message frmMessage = new Message(Properties.Resources.Uploaded_Thanos);
-            frmMessage.StartPosition = FormStartPosition.Manual;
-            frmMessage.Location = mouse_pt; 
-            frmMessage.ShowDialog();
+            
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -615,6 +660,15 @@ namespace Hot_Snap
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
 
+        }
+
+        private void btnPullDeck_Click(object sender, EventArgs e)
+        {
+            //flow_variants.Controls.Clear();
+            //lblNoVariants.Visible = false;
+            //lblInstalled.Visible = false;
+            //lblDblClick.Visible = false;
+            RetrievePreview(@"Cardbacks/", dgv_decks);
         }
     }
 }

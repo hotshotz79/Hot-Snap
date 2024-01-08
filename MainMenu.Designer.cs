@@ -40,9 +40,13 @@
             this.dgv_cards = new System.Windows.Forms.DataGridView();
             this.flow_variants = new System.Windows.Forms.FlowLayoutPanel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label22 = new System.Windows.Forms.Label();
+            this.btnPullDeck = new System.Windows.Forms.Button();
             this.flow_deck = new System.Windows.Forms.FlowLayoutPanel();
             this.dgv_decks = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.radDeck = new System.Windows.Forms.RadioButton();
+            this.radVariant = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblCardSelected = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -54,7 +58,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -75,7 +78,11 @@
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.label21 = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.chk_skipCaptureMsg = new System.Windows.Forms.CheckBox();
@@ -97,14 +104,10 @@
             this.btnSettingsBrowse = new System.Windows.Forms.Button();
             this.txtToken = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.imgList_icons = new System.Windows.Forms.ImageList(this.components);
             this.dialog_snapLoc = new System.Windows.Forms.FolderBrowserDialog();
             this.diag_fileUpload = new System.Windows.Forms.OpenFileDialog();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_cards)).BeginInit();
@@ -118,12 +121,12 @@
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -273,6 +276,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label22);
+            this.tabPage2.Controls.Add(this.btnPullDeck);
             this.tabPage2.Controls.Add(this.flow_deck);
             this.tabPage2.Controls.Add(this.dgv_decks);
             this.tabPage2.ImageIndex = 2;
@@ -284,13 +289,46 @@
             this.tabPage2.Text = "Decks";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label22
+            // 
+            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label22.BackColor = System.Drawing.Color.LightBlue;
+            this.label22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label22.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label22.Location = new System.Drawing.Point(154, 623);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(822, 25);
+            this.label22.TabIndex = 5;
+            this.label22.Text = "Variants found, double click to install";
+            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label22.Visible = false;
+            // 
+            // btnPullDeck
+            // 
+            this.btnPullDeck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnPullDeck.BackColor = System.Drawing.Color.ForestGreen;
+            this.btnPullDeck.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnPullDeck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPullDeck.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnPullDeck.Location = new System.Drawing.Point(77, 623);
+            this.btnPullDeck.Name = "btnPullDeck";
+            this.btnPullDeck.Size = new System.Drawing.Size(78, 25);
+            this.btnPullDeck.TabIndex = 3;
+            this.btnPullDeck.Text = "Pull";
+            this.btnPullDeck.UseVisualStyleBackColor = false;
+            this.btnPullDeck.Click += new System.EventHandler(this.btnPullDeck_Click);
+            // 
             // flow_deck
             // 
+            this.flow_deck.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.flow_deck.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.flow_deck.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flow_deck.Location = new System.Drawing.Point(158, 3);
+            this.flow_deck.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flow_deck.Location = new System.Drawing.Point(154, 0);
             this.flow_deck.Name = "flow_deck";
-            this.flow_deck.Size = new System.Drawing.Size(815, 641);
+            this.flow_deck.Size = new System.Drawing.Size(822, 622);
             this.flow_deck.TabIndex = 1;
             // 
             // dgv_decks
@@ -299,23 +337,25 @@
             this.dgv_decks.AllowUserToDeleteRows = false;
             this.dgv_decks.AllowUserToResizeColumns = false;
             this.dgv_decks.AllowUserToResizeRows = false;
+            this.dgv_decks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.dgv_decks.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.dgv_decks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_decks.ColumnHeadersVisible = false;
-            this.dgv_decks.Dock = System.Windows.Forms.DockStyle.Left;
-            this.dgv_decks.Location = new System.Drawing.Point(3, 3);
+            this.dgv_decks.Location = new System.Drawing.Point(0, 0);
             this.dgv_decks.MultiSelect = false;
             this.dgv_decks.Name = "dgv_decks";
             this.dgv_decks.ReadOnly = true;
             this.dgv_decks.RowHeadersVisible = false;
-            this.dgv_decks.Size = new System.Drawing.Size(155, 641);
+            this.dgv_decks.Size = new System.Drawing.Size(155, 622);
             this.dgv_decks.TabIndex = 0;
             // 
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.tabPage3.Controls.Add(this.radDeck);
+            this.tabPage3.Controls.Add(this.radVariant);
             this.tabPage3.Controls.Add(this.panel1);
-            this.tabPage3.Controls.Add(this.button1);
             this.tabPage3.Controls.Add(this.btnReset);
             this.tabPage3.Controls.Add(this.groupBox1);
             this.tabPage3.Controls.Add(this.label5);
@@ -330,6 +370,28 @@
             this.tabPage3.Size = new System.Drawing.Size(976, 647);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Upload";
+            // 
+            // radDeck
+            // 
+            this.radDeck.AutoSize = true;
+            this.radDeck.Location = new System.Drawing.Point(393, 133);
+            this.radDeck.Name = "radDeck";
+            this.radDeck.Size = new System.Drawing.Size(55, 18);
+            this.radDeck.TabIndex = 19;
+            this.radDeck.Text = "Deck";
+            this.radDeck.UseVisualStyleBackColor = true;
+            // 
+            // radVariant
+            // 
+            this.radVariant.AutoSize = true;
+            this.radVariant.Checked = true;
+            this.radVariant.Location = new System.Drawing.Point(318, 133);
+            this.radVariant.Name = "radVariant";
+            this.radVariant.Size = new System.Drawing.Size(69, 18);
+            this.radVariant.TabIndex = 18;
+            this.radVariant.TabStop = true;
+            this.radVariant.Text = "Variant";
+            this.radVariant.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -366,9 +428,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(7, 14);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(143, 14);
+            this.label6.Size = new System.Drawing.Size(169, 14);
             this.label6.TabIndex = 6;
-            this.label6.Text = "2. Variant .bundle File";
+            this.label6.Text = "2. File to upload (.bundle)";
             // 
             // txtBundleLoc
             // 
@@ -445,18 +507,6 @@
             this.label4.TabIndex = 14;
             this.label4.Text = "(A-Z 0-9  only; no special characters or spaces)";
             // 
-            // button1
-            // 
-            this.button1.Enabled = false;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(789, 276);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 51);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "Flip to Deck";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
-            // 
             // btnReset
             // 
             this.btnReset.BackColor = System.Drawing.Color.DimGray;
@@ -497,14 +547,14 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(37, 139);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(212, 14);
+            this.label5.Size = new System.Drawing.Size(148, 14);
             this.label5.TabIndex = 5;
-            this.label5.Text = "1. Preview Screenshot of Variant";
+            this.label5.Text = "1. Preview Screenshot";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(155, 458);
+            this.label3.Location = new System.Drawing.Point(153, 458);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(20, 14);
             this.label3.TabIndex = 3;
@@ -684,6 +734,28 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Settings";
             // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label21.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label21.Location = new System.Drawing.Point(487, 612);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(281, 18);
+            this.label21.TabIndex = 14;
+            this.label21.Text = "Ongoing: Developer of Hot SNAP!";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(4, 4);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(964, 197);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 13;
+            this.pictureBox2.TabStop = false;
+            // 
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.ActiveBorder;
@@ -696,6 +768,28 @@
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "About";
+            // 
+            // linkLabel2
+            // 
+            this.linkLabel2.AutoSize = true;
+            this.linkLabel2.Location = new System.Drawing.Point(6, 104);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(53, 14);
+            this.linkLabel2.TabIndex = 13;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Text = "Discord";
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(6, 82);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(49, 14);
+            this.linkLabel1.TabIndex = 12;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "GitHub";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // label9
             // 
@@ -927,6 +1021,16 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "GitHub Token:";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(472, 207);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(305, 374);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 12;
+            this.pictureBox1.TabStop = false;
+            // 
             // imgList_icons
             // 
             this.imgList_icons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgList_icons.ImageStream")));
@@ -940,61 +1044,6 @@
             // diag_fileUpload
             // 
             this.diag_fileUpload.DefaultExt = "bundle";
-            this.diag_fileUpload.Filter = "Cards|cards_assets*.bundle";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(472, 207);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(305, 374);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 12;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(4, 4);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(964, 197);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 13;
-            this.pictureBox2.TabStop = false;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label21.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label21.Location = new System.Drawing.Point(487, 612);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(281, 18);
-            this.label21.TabIndex = 14;
-            this.label21.Text = "Ongoing: Developer of Hot SNAP!";
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(6, 82);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(49, 14);
-            this.linkLabel1.TabIndex = 12;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "GitHub";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
-            // linkLabel2
-            // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(6, 104);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(53, 14);
-            this.linkLabel2.TabIndex = 13;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "Discord";
-            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
             // MainMenu
             // 
@@ -1004,7 +1053,7 @@
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainMenu";
-            this.Text = "Hot SNAP! (v0.3)";
+            this.Text = "Hot SNAP! (v0.4)";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_cards)).EndInit();
@@ -1024,6 +1073,7 @@
             this.groupBox6.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox5.ResumeLayout(false);
@@ -1033,7 +1083,6 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1088,7 +1137,6 @@
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label lblNoVariants;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.CheckBox chk_skipCaptureMsg;
         private System.Windows.Forms.Button btnPull;
@@ -1115,5 +1163,9 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Button btnPullDeck;
+        private System.Windows.Forms.RadioButton radDeck;
+        private System.Windows.Forms.RadioButton radVariant;
     }
 }
