@@ -1,4 +1,5 @@
-﻿using Octokit;
+﻿using Hot_Snap.Properties;
+using Octokit;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,22 +22,46 @@ namespace Hot_Snap
 {
     public partial class MainMenu : Form
     {
+        public DataTable dtVariants;
+        public DataTable dtDecks;
         public MainMenu()
         {
-            InitializeComponent();
+            InitializeComponent();            
             LoadSettings();
             LoadCardList();
             LoadDeckList();
         }
 
-        private async void LoadDeckList()
+        private void LoadDeckList()
         {
             if (Properties.Settings.Default.snapLocation == "")
             {
-                //MessageBox.Show("Snap folder needs to be set in Settings", "Missing Snap Folder", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Snap folder needs to be set in Settings", "Required", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
+            if (dtDecks == null)
+            {
+                dtDecks = new DataTable();
+                dtDecks.Columns.Add("Deck Name");
+                dtDecks.Columns.Add("File Name");
+                dtDecks.Columns.Add("Local");
+            }
+            else
+                dtDecks.Clear();
+
+            LoadDeckLocal();
+            LoadDeckGitHub();
+
+            dtDecks.DefaultView.Sort = "Deck Name asc";
+            dgv_decks.DataSource = dtDecks;
+            dgv_decks.Columns[1].Visible = false;
+            dgv_decks.Columns[2].Visible = false;
+            dgv_decks.Columns[0].Width = 140;
+        }
+
+        private async void LoadDeckGitHub()
+        {
             //Connect to GitHub
             var client = new GitHubClient(new ProductHeaderValue("HotSnap"));
 
@@ -58,19 +83,11 @@ namespace Hot_Snap
                 webClient.Headers.Add(HttpRequestHeader.Authorization, "token "+ Properties.Settings.Default.token);
                 webClient.Headers.Add(HttpRequestHeader.Accept, "application/octet-stream");
 
-                string snapFolder = Properties.Settings.Default.snapLocation + @"\SNAP_Data\StreamingAssets\aa\StandaloneWindows64\MockCdn";
-                bool skip = false;
-                //String[] files = Directory.GetFiles(snapFolder, "cards_assets_*", SearchOption.TopDirectoryOnly);
-                //DataTable table = new DataTable();
-                //table.Columns.Add("Card Name");
-                //table.Columns.Add("File Name");
-
                 string deckFolder = Properties.Settings.Default.snapLocation + @"\SNAP_Data\StreamingAssets\aa\StandaloneWindows64\MockCdn";
 
                 String[] files = Directory.GetFiles(deckFolder, "cardbacks_assets_*", SearchOption.TopDirectoryOnly);
-                DataTable table = new DataTable();
-                table.Columns.Add("Deck Name");
-                table.Columns.Add("File Name");
+
+                //cardbacks_assets_snapcube_01_4c6cdee88dea349632974c04c25cfa5f
 
                 for (int x = 0; x < previewContents.Count; x++)
                 {
@@ -78,49 +95,115 @@ namespace Hot_Snap
                     {
                         for (int i = 0; i < files.Length; i++)
                         {
-                            skip = false;
                             FileInfo file = new FileInfo(files[i]);
 
                             string[] name = file.Name.Split('_');
 
-                            if (name[2] == previewContents[x].Name)
+                            if (name[2] + "_" + name[3] == previewContents[x].Name)
                             {
-                                DataRow dr = table.NewRow();
-                                dr[0] = file.Name.Replace("cardbacks_assets_", "").Split('_').First();
+                                DataRow dr = dtDecks.NewRow();
+                                dr[0] = file.Name.Replace("cardbacks_assets_", "").Split('_').First() + "_" + name[3].ToString();
                                 dr[1] = file.Name;
-                                table.Rows.Add(dr);
+                                dr[2] = "false";
+                                dtDecks.Rows.Add(dr);
                             }
                         }
                     }
                 }
-                /*for (int i = 0; i < files.Length; i++)
-                {
-                    FileInfo file = new FileInfo(files[i]);
-                    DataRow dr = table.NewRow();
-                    string[] name = file.Name.Split('_');
-                    dr[0] = file.Name.Replace("cardbacks_assets_", "").Split('_').First();
-                    dr[1] = file.Name;
-
-                    table.Rows.Add(dr);
-                }*/
-                dgv_decks.DataSource = table;
-                dgv_decks.Columns[1].Visible = false;
-                dgv_decks.Columns[0].Width = 120;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
+        private void LoadDeckLocal()
+        {
+            string currentPath = Directory.GetCurrentDirectory();
 
-        private async void LoadCardList()
+            var deckName = new DirectoryInfo(currentPath + @"\Custom\Decks").GetDirectories().Select(d => d.Name);
+
+            string snapFolder = Properties.Settings.Default.snapLocation + @"\SNAP_Data\StreamingAssets\aa\StandaloneWindows64\MockCdn";
+            //bool skip = false;
+            String[] files = Directory.GetFiles(snapFolder, "cardbacks_assets_*", SearchOption.TopDirectoryOnly);
+
+            foreach (var custName in deckName)
+            {
+                for (int i = 0; i < files.Length; i++)
+                {
+                    FileInfo file = new FileInfo(files[i]);
+                    string[] name = file.Name.Split('_');   //Snap Folder name splits
+                    string[] custSplit = custName.Split('_');
+
+                    //Base card only has name
+                    if (custSplit.Length == 1)
+                    {
+                        //base card split will only have 4 length
+                        if (name.Length == 4)
+                        {
+                            if (name[2] == custSplit[0])
+                            {
+                                //Console.WriteLine("Match Found " + name[2]);
+                                DataRow dr = dtDecks.NewRow();
+                                dr[0] = file.Name.Replace("cardbacks_assets_", "").Split('_').First();
+                                dr[1] = file.Name;
+                                dr[2] = "true";
+                                dtDecks.Rows.Add(dr);
+                                break;
+                            }
+                        }
+                    }
+                    //Variants have digits, resulting in split
+                    else
+                    {
+                        if (name.Length == 5)
+                        {
+                            if (name[2] == custSplit[0] &&
+                            name[3] == custSplit[1])
+                            {
+                                DataRow dr = dtDecks.NewRow();
+                                dr[0] = file.Name.Replace("cardbacks_assets_", "").Split('_').First() + "_" + custSplit[1];
+                                dr[1] = file.Name;
+                                dr[2] = "true";
+                                dtDecks.Rows.Add(dr);
+                                break;
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
+        private void LoadCardList()
         {
             if (Properties.Settings.Default.snapLocation == "")
             {
-                MessageBox.Show("Snap folder and GitHub Token needs to be set in Settings", "Required", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Snap folder (and GitHub Token for online pulls) needs to be set in Settings", "Required", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
+            if (dtVariants == null)
+            {
+                dtVariants = new DataTable();
+                dtVariants.Columns.Add("Card Name");
+                dtVariants.Columns.Add("File Name");
+                dtVariants.Columns.Add("Local");
+            }
+            else
+                dtVariants.Clear();
+
+            LoadVariantLocal();
+            LoadVariantGitHub();
+
+            dtVariants.DefaultView.Sort = "Card Name asc";
+            dgv_cards.DataSource = dtVariants;
+            dgv_cards.Columns[1].Visible = false;
+            dgv_cards.Columns[2].Visible = false;
+            dgv_cards.Columns[0].Width = 140;
+        }
+
+        private async void LoadVariantGitHub()
+        {
             //Connect to GitHub
             var client = new GitHubClient(new ProductHeaderValue("HotSnap"));
 
@@ -143,7 +226,7 @@ namespace Hot_Snap
                 webClient.Headers.Add(HttpRequestHeader.Accept, "application/octet-stream");
 
                 string snapFolder = Properties.Settings.Default.snapLocation + @"\SNAP_Data\StreamingAssets\aa\StandaloneWindows64\MockCdn";
-                bool skip = false;
+
                 String[] files = Directory.GetFiles(snapFolder, "cards_assets_*", SearchOption.TopDirectoryOnly);
                 DataTable table = new DataTable();
                 table.Columns.Add("Card Name");
@@ -155,50 +238,29 @@ namespace Hot_Snap
                     {
                         for (int i = 0; i < files.Length; i++)
                         {
-                            skip = false;
                             FileInfo file = new FileInfo(files[i]);
                             //Skip certain cards (such as Nico Robins spells)
                             if (file.Name.Contains("spell0"))
                                 continue;
-                            //Console.WriteLine(file.Name + " | " + previewContents[x].Name);
+
                             string[] name = file.Name.Split('_');
-                            
+
                             if (name[2] == previewContents[x].Name)
                             {
-                                for (int j = 1; j < 21; j++)
+                                //if variant, name split length = 5
+                                //otherwise base split = 4
+                                if (name.Length == 4)
                                 {
-                                    if (j < 10)
-                                    {
-                                        if (file.Name.Contains("_0" + j + "_"))
-                                        {
-                                            skip = true;
-                                            break;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (file.Name.Contains("_" + j + "_"))
-                                        {
-                                            skip = true;
-                                            break;
-                                        }
-                                    }
-                                }
-                                if (!skip)
-                                {
-                                    DataRow dr = table.NewRow();
+                                    DataRow dr = dtVariants.NewRow();
                                     dr[0] = file.Name.Replace("cards_assets_", "").Split('_').First();
                                     dr[1] = file.Name;
-                                    table.Rows.Add(dr);
+                                    dr[2] = "false";
+                                    dtVariants.Rows.Add(dr);
                                 }
                             }
                         }
                     }
                 }
-
-                dgv_cards.DataSource = table;
-                dgv_cards.Columns[1].Visible = false;
-                dgv_cards.Columns[0].Width = 120;
             }
             catch (Exception ex)
             {
@@ -206,11 +268,78 @@ namespace Hot_Snap
             }
         }
 
+        private void LoadVariantLocal()
+        {
+            string currentPath = Directory.GetCurrentDirectory();
+            if (!Directory.Exists(Path.Combine(currentPath, "Custom")))
+            {
+                Directory.CreateDirectory(Path.Combine(currentPath, "Custom"));
+                Directory.CreateDirectory(Path.Combine(currentPath + @"\Custom", "Variants"));
+                Directory.CreateDirectory(Path.Combine(currentPath + @"\Custom", "Decks"));
+            }
+            //var variantsFolder = new List<string>(Directory.GetDirectories(currentPath + @"\Custom\Variants"));
+            var variantsName = new DirectoryInfo(currentPath + @"\Custom\Variants").GetDirectories().Select(d => d.Name);
+
+            string snapFolder = Properties.Settings.Default.snapLocation + @"\SNAP_Data\StreamingAssets\aa\StandaloneWindows64\MockCdn";
+            //bool skip = false;
+            String[] files = Directory.GetFiles(snapFolder, "cards_assets_*", SearchOption.TopDirectoryOnly);
+            DataTable table = new DataTable();
+            table.Columns.Add("Card Name");
+            table.Columns.Add("File Name");
+
+            foreach (var custName in variantsName)
+            {
+                for (int i = 0; i < files.Length; i++)
+                {
+                    FileInfo file = new FileInfo(files[i]);
+                    string[] name = file.Name.Split('_');   //Snap Folder name splits
+                    string[] custSplit = custName.Split('_');
+
+                    //Base card only has name
+                    if (custSplit.Length == 1)
+                    {
+                        //base card split will only have 4 length
+                        if (name.Length == 4)
+                        {
+                            if (name[2] == custSplit[0])
+                            {
+                                //Console.WriteLine("Match Found " + name[2]);
+                                DataRow dr = dtVariants.NewRow();
+                                dr[0] = file.Name.Replace("cards_assets_", "").Split('_').First();
+                                dr[1] = file.Name;
+                                dr[2] = "true";
+                                dtVariants.Rows.Add(dr);
+                                break;
+                            }
+                        }
+                    }
+                    //Variants have digits, resulting in split
+                    else
+                    {
+                        if (name.Length == 5)
+                        {
+                            if (name[2] == custSplit[0] &&
+                            name[3] == custSplit[1])
+                            {
+                                DataRow dr = dtVariants.NewRow();
+                                dr[0] = file.Name.Replace("cards_assets_", "").Split('_').First() + "_" + custSplit[1];
+                                dr[1] = file.Name;
+                                dr[2] = "true";
+                                dtVariants.Rows.Add(dr);
+                                break;
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
         private void LoadSettings()
         {
             txtSnapLocation.Text = Properties.Settings.Default.snapLocation;
             txtToken.Text = Properties.Settings.Default.token;
             txtUsername.Text = Properties.Settings.Default.username;
+
             if (Properties.Settings.Default.dispNsfw == "yes")
                 chk_showNsfw.Checked = true;
             else
@@ -226,24 +355,29 @@ namespace Hot_Snap
             Properties.Settings.Default.snapLocation = txtSnapLocation.Text;
             Properties.Settings.Default.token = txtToken.Text;
             Properties.Settings.Default.username = txtUsername.Text;
+
             if (chk_showNsfw.Checked)
                 Properties.Settings.Default.dispNsfw = "yes";
             else
                 Properties.Settings.Default.dispNsfw = "no";
+
             if (chk_skipCaptureMsg.Checked)
                 Properties.Settings.Default.capturePop = "yes";
             else
                 Properties.Settings.Default.capturePop = "no";
+
             Properties.Settings.Default.Save();
+
             if (!String.IsNullOrEmpty(txtSnapLocation.Text) && !String.IsNullOrEmpty(txtToken.Text))
-            { 
+            {
                 LoadCardList();
-                LoadDeckList(); 
+                LoadDeckList();
             }
 
+            //Emote Pop Up
             var mm = new MainMenu();
             Point mouse_pt = new Point(MousePosition.X, MousePosition.Y-200);
-            Message frmMessage = new Message(Properties.Resources.HulkThing_FistBump);
+            Message frmMessage = new Message(Properties.Resources.HulkThing_FistBump, 2000);
             frmMessage.StartPosition = FormStartPosition.Manual;
             frmMessage.Location = mouse_pt;
             frmMessage.ShowDialog();
@@ -251,11 +385,11 @@ namespace Hot_Snap
 
         private void btnSettingsBrowse_Click(object sender, EventArgs e)
         {
-            DialogResult result = dialog_snapLoc.ShowDialog();
+            DialogResult result = dlg_snapLoc.ShowDialog();
 
             if (result == DialogResult.OK)
             {
-                txtSnapLocation.Text = dialog_snapLoc.SelectedPath;
+                txtSnapLocation.Text = dlg_snapLoc.SelectedPath;
             }
         }
 
@@ -270,6 +404,60 @@ namespace Hot_Snap
 
         private async void RetrievePreview(string folder, DataGridView dgv)
         {
+            //Check if local file
+            if (dgv.CurrentRow.Cells[2].Value.ToString() == "true")
+            {
+                int varCount = 0;
+                string currentPath = Directory.GetCurrentDirectory();
+                List<string> localFolder;
+                
+                if (folder.Contains("Variant"))
+                    localFolder = new List<string>(Directory.GetDirectories(currentPath + @"\Custom\Variants"));
+                else
+                    localFolder = new List<string>(Directory.GetDirectories(currentPath + @"\Custom\Decks"));
+                //var variantsName = new DirectoryInfo(currentPath + @"\Custom\Variants").GetDirectories().Select(d => d.Name);
+
+                foreach (var sub in localFolder)
+                {
+                    if (sub.ToString().Contains(dgv.CurrentRow.Cells[0].Value.ToString()))
+                    {
+                        String[] varImages = Directory.GetFiles(sub, "*.png", SearchOption.TopDirectoryOnly);
+                        varCount = varImages.Length;
+                        foreach (String thumbnail in varImages)
+                        {
+                            var img = Image.FromFile(thumbnail);
+
+                            PictureBox pbCard = new PictureBox();
+                            pbCard.Image = img;
+                            pbCard.Name = Path.GetFileName(thumbnail).Replace(".png", ".bundle");// used for local file name
+                            pbCard.Tag = dgv_cards.CurrentRow.Cells[1].Value.ToString(); //used for MockCdn file name
+                            pbCard.AccessibleDescription = Path.GetDirectoryName(thumbnail);    //used for folder path
+                            pbCard.AccessibleName  = "local";   //determine if local or github
+                            pbCard.Size = new Size(260, 310);
+                            pbCard.SizeMode = PictureBoxSizeMode.StretchImage;
+                            pbCard.BorderStyle = BorderStyle.FixedSingle;
+                            pbCard.DoubleClick += new EventHandler(iconClicked);
+                            if (folder.Contains("Variant"))
+                                flow_variants.Controls.Add(pbCard);
+                            else
+                                flow_deck.Controls.Add(pbCard);
+                        }
+                    }
+                }
+
+                if (folder.Contains("Variant"))
+                {
+                    lblDblClick.Text = varCount + " Variants found, double click to install"; //previewContents.Count /2 + " Variants found, double click to install";
+                    lblDblClick.Visible = true;
+                }
+                else
+                {
+                    lblDblClickDeck.Text = varCount + " Decks found, double click to install"; //previewContents.Count /2 + " Variants found, double click to install";
+                    lblDblClickDeck.Visible = true;
+                }
+                    //Skip Github
+                return;
+            }
 
             //Connect to GitHub
             var client = new GitHubClient(new ProductHeaderValue("HotSnap"));
@@ -277,6 +465,7 @@ namespace Hot_Snap
             var tokenAuth = new Credentials(Properties.Settings.Default.token);
             client.Credentials = tokenAuth;
 
+            //GitHub pull begins here
             try
             {
                 //Define GitHub [Account] > [Repo] > [Folder]
@@ -298,9 +487,8 @@ namespace Hot_Snap
                         if (previewContents[i].Name.Contains(".image"))
                         {
                             //if (!chk_showNsfw.Checked && previewContents[i].Name.Contains("_nsfw"))
-                                //continue;
-                            var img = Image.FromFile("nsfw.png");
-
+                            //continue;
+                            Image img = Resources.nsfw;
                             if (chk_showNsfw.Checked)
                             {
                                 //Convert Base64 to actual image
@@ -312,7 +500,7 @@ namespace Hot_Snap
                             else
                             {
                                 if (previewContents[i].Name.Contains("_nsfw"))
-                                    img = Image.FromFile("nsfw.png");
+                                    img = Resources.nsfw;
                                 else
                                 {
                                     //Convert Base64 to actual image
@@ -328,6 +516,7 @@ namespace Hot_Snap
                             pbCard.Image = img;
                             pbCard.Name = previewContents[i].DownloadUrl; //used for downloading .bundle file
                             pbCard.Tag = dgv_cards.CurrentRow.Cells[1].Value.ToString(); //used for copy-pasting
+                            pbCard.AccessibleName = "online";
                             pbCard.Size = new Size(260, 310);
                             pbCard.SizeMode = PictureBoxSizeMode.StretchImage;
                             pbCard.BorderStyle = BorderStyle.FixedSingle;
@@ -360,13 +549,31 @@ namespace Hot_Snap
         {
             //Hash verification
             PictureBox pb = (PictureBox)sender;
-            string[] nameSplit = pb.Name.Split('_');
-            string[] baseNameSplit = pb.Tag.ToString().Split('_');
+            string[] nameSplit = pb.Name.Split('_');    //File name
+            string[] baseNameSplit = pb.Tag.ToString().Split('_'); //MockCdn name
+            bool hashMisMatch = false;
+            string hashCheck = nameSplit[4].ToString();
+            int index = hashCheck.IndexOf(".");
 
-            if (baseNameSplit[3].ToString().Replace(".bundle", "") != nameSplit[4].ToString().Replace(".image","")) //.replace (".image", "") -- change to [4] when hash added -- [5] will be nsfw
+            if (index >= 0)
+                hashCheck = hashCheck.Substring(0, index);
+
+            if (baseNameSplit.Length == 4)
             {
-                DialogResult dialogResult = MessageBox.Show("The hash tag did not match, possibly due to variant created with older asset.\n\n" +
-                    "Installing this variant might not work in game (changes can be reverted using Restore button)","Hash mismatch", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (baseNameSplit[3].ToString().Replace(".bundle", "") != hashCheck) //.replace (".image", "") -- change to [4] when hash added -- [5] will be nsfw
+                    hashMisMatch = true;
+            }
+            else
+            {
+                if (baseNameSplit[4].ToString().Replace(".bundle", "") != hashCheck)
+                    hashMisMatch = true;
+            }
+
+            if (hashMisMatch)
+            {
+                DialogResult dialogResult = MessageBox.Show("The hash tag did not match, possibly due to custom variant created with older asset.\n\n" +
+                    "Installing this variant might not work in game (changes can be reverted using Restore button)\n\n"
+                    +"Do you want to continue?", "Hash mismatch", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dialogResult == DialogResult.Yes)
                 {
                     //do nothing, let the process flow
@@ -377,42 +584,56 @@ namespace Hot_Snap
                 }
             }
 
-            //Download Bundle File
-            WebClient webClient = new WebClient();
-            webClient.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
-            webClient.Headers.Add(HttpRequestHeader.Authorization, "token "+ Properties.Settings.Default.token);
-            webClient.Headers.Add(HttpRequestHeader.Accept, "application/octet-stream");
-            webClient.DownloadFile(pb.Name.Replace(".image",".variant").ToString(), "temp.bundle");
-
-            //Convert Base64 to actual bundle
-            var str = File.ReadAllText("temp.bundle");
-            File.WriteAllBytes("b64.bundle", Convert.FromBase64String(str));
-
-            string copyPath = "b64.bundle";
-            string pastePath = Properties.Settings.Default.snapLocation + @"\SNAP_Data\StreamingAssets\aa\StandaloneWindows64\MockCdn\" + pb.Tag.ToString();
-
-            //Backup first
-            Directory.CreateDirectory("Backup");
+            //Backup the file first if one doesn't exist
             string backupPath = @"Backup\" + pb.Tag.ToString();
-            if (!File.Exists(backupPath)) 
+            string pastePath = Properties.Settings.Default.snapLocation + @"\SNAP_Data\StreamingAssets\aa\StandaloneWindows64\MockCdn\" + pb.Tag.ToString();
+            string copyPath = "b64.bundle";
+
+            Directory.CreateDirectory("Backup");
+            if (!File.Exists(backupPath))
                 File.Copy(pastePath, backupPath, false);
 
-            //Copy > Overwrite > Delete temp files
-            File.Copy(copyPath, pastePath, true);
-            File.Delete("b64.bundle");
-            File.Delete("temp.bundle");
+            //Check if the selected file is local
+            if (pb.AccessibleName == "local")
+            {
+                copyPath = pb.AccessibleDescription + "\\" + pb.Name;
+                File.Copy(copyPath, pastePath, true);
 
-            lblInstalled.Text = "Variant: " + nameSplit[2].ToString() + " | By user: " + nameSplit[3].Replace(".png","")  + " | Status: Installed";
-            lblInstalled.Visible = true;
-            lblDblClick.Visible = false;
+                lblInstalledDeck.Text = "Deck: " + nameSplit[2].ToString() + " | By user: " + nameSplit[3].Replace(".png", "")  + " | Status: Installed";
+                lblInstalledDeck.Visible = true;
+                lblDblClickDeck.Visible = false;
+            }
+            //GitHub call otherwise
+            else
+            {
+                //Download Bundle File
+                WebClient webClient = new WebClient();
+                webClient.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+                webClient.Headers.Add(HttpRequestHeader.Authorization, "token "+ Properties.Settings.Default.token);
+                webClient.Headers.Add(HttpRequestHeader.Accept, "application/octet-stream");
+                webClient.DownloadFile(pb.Name.Replace(".image", ".variant").ToString(), "temp.bundle");
+
+                //Convert Base64 to actual bundle
+                var str = File.ReadAllText("temp.bundle");
+                File.WriteAllBytes("b64.bundle", Convert.FromBase64String(str));
+
+                //Copy > Overwrite > Delete temp files
+                File.Copy(copyPath, pastePath, true);
+                File.Delete("b64.bundle");
+                File.Delete("temp.bundle");
+
+                lblInstalled.Text = "Variant: " + nameSplit[2].ToString() + " | By user: " + nameSplit[3].Replace(".png", "")  + " | Status: Installed";
+                lblInstalled.Visible = true;
+                lblDblClick.Visible = false;
+            }
         }
 
         private void btnCapture_Click(object sender, EventArgs e)
         {
             if (!chk_skipCaptureMsg.Checked)
-            MessageBox.Show("Make sure the game is running fullscreen behind this application. \n\nClick OK to capture card",
-                "Ready to Capture",MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-            
+                MessageBox.Show("Make sure the game is running fullscreen behind this application. \n\nClick OK to capture card",
+                    "Ready to Capture", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+
             Rectangle bounds = Screen.GetBounds(Point.Empty);
             using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
             {
@@ -427,7 +648,7 @@ namespace Hot_Snap
                 }
                 //bitmap.Save("capture.png", ImageFormat.Png);
 
-                Bitmap croppedBmp = new Bitmap(10,10);
+                Bitmap croppedBmp = new Bitmap(10, 10);
                 croppedBmp = bitmap.Clone(new Rectangle(700, 100, 520, 620), PixelFormat.Format32bppArgb);
 
                 croppedBmp.Save("capture.png", ImageFormat.Png);
@@ -439,25 +660,29 @@ namespace Hot_Snap
         private void btnBrowseBundle_Click(object sender, EventArgs e)
         {
             lblCardSelected.Text = "";
-            diag_fileUpload.InitialDirectory = Properties.Settings.Default.snapLocation + @"\SNAP_Data\StreamingAssets\aa\StandaloneWindows64\MockCdn";
+            dlg_fileUpload.InitialDirectory = Properties.Settings.Default.snapLocation + @"\SNAP_Data\StreamingAssets\aa\StandaloneWindows64\MockCdn";
             if (radVariant.Checked)
-                diag_fileUpload.Filter = "Variants|cards_assets*.bundle";
+                dlg_fileUpload.Filter = "Variants|cards_assets*.bundle";
             if (radDeck.Checked)
-                diag_fileUpload.Filter = "CardBacks|cardbacks*.bundle";
+                dlg_fileUpload.Filter = "CardBacks|cardbacks*.bundle";
 
-            DialogResult result = diag_fileUpload.ShowDialog();
-            
+            DialogResult result = dlg_fileUpload.ShowDialog();
+
             if (result == DialogResult.OK)
             {
                 //Check if base card is selected
-                string[] cardSelectedName = diag_fileUpload.SafeFileName.Split('_');
+                string[] cardSelectedName = dlg_fileUpload.SafeFileName.Split('_');
                 if (radVariant.Checked && cardSelectedName.Count() > 4)
                 {
                     MessageBox.Show("Selected bundle is not a 'Base' card.\n\nCurrent version of this tool does not support customization of variant assets (file name tagged with 01-20).", "Base Asset Only", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                txtBundleLoc.Text = diag_fileUpload.FileName;
+                txtBundleLoc.Text = dlg_fileUpload.FileName;
                 lblCardSelected.Text = cardSelectedName[2].ToString();
+
+                if (radDeck.Checked)
+                    lblCardSelected.Text = lblCardSelected.Text + "_" + cardSelectedName[3].ToString();
+
             }
         }
 
@@ -480,9 +705,62 @@ namespace Hot_Snap
                 MessageBox.Show("Variant Name Missing");
                 return;
             }
-            UploadToGit();
+            if (radUpGitHub.Checked && txtToken.Text == null)
+            {
+                MessageBox.Show("In order to upload to GitHub, you need to enter the GitHub Token under Settings");
+                return;
+            }
+
+            if (radUpGitHub.Checked)
+                UploadToGit();
+            else
+                UploadToLocal();
         }
-        
+
+        private void UploadToLocal()
+        {
+            string snapFolder = Properties.Settings.Default.snapLocation + @"\SNAP_Data\StreamingAssets\aa\StandaloneWindows64\MockCdn";
+
+            string destPath = Directory.GetCurrentDirectory();
+
+            if (radVariant.Checked)
+                destPath = destPath + @"\Custom\Variants\" + lblCardSelected.Text + @"\";
+            else
+                destPath = destPath + @"\Custom\Decks\" + lblCardSelected.Text + @"\";
+
+            if (!Directory.Exists(destPath))
+            {
+                Directory.CreateDirectory(destPath);
+            }
+
+            string[] getHash = txtBundleLoc.Text.Split('_');
+            string hashVerify = "";
+            for (int x = 0; x < getHash.Length; x++)
+            {
+                if (getHash[x].ToString().Contains(".bundle"))
+                    hashVerify = getHash[x].ToString().Replace(".bundle", "");
+            }
+
+            string saveAs =  DateTime.Now.ToString("yyMMdd_HHmmss") + "_" + txtVariantName.Text + "_" + Properties.Settings.Default.username + "_" + hashVerify + ".bundle";
+
+            //Copy the bundle from MockCdn to Custom folder
+            //Copy the png from the root folder
+            File.Copy(txtBundleLoc.Text, Path.Combine(destPath, saveAs));
+            saveAs = saveAs.Replace(".bundle", ".png");
+            File.Copy("capture.png", Path.Combine(destPath, saveAs));
+
+            //MessageBox.Show("Upload successful");
+            var mm = new MainMenu();
+            Point mouse_pt = new Point(MousePosition.X, MousePosition.Y-200);
+            Message frmMessage = new Message(Properties.Resources.Uploaded_Thanos, 2000);
+            frmMessage.StartPosition = FormStartPosition.Manual;
+            frmMessage.Location = mouse_pt;
+            frmMessage.ShowDialog();
+
+            ResetUpload();
+
+        }
+
         private async void UploadToGit()
         {
             var client = new GitHubClient(new ProductHeaderValue("HotSnap"));
@@ -531,7 +809,7 @@ namespace Hot_Snap
                 //MessageBox.Show("Upload successful");
                 var mm = new MainMenu();
                 Point mouse_pt = new Point(MousePosition.X, MousePosition.Y-200);
-                Message frmMessage = new Message(Properties.Resources.Uploaded_Thanos);
+                Message frmMessage = new Message(Properties.Resources.Uploaded_Thanos, 2000);
                 frmMessage.StartPosition = FormStartPosition.Manual;
                 frmMessage.Location = mouse_pt;
                 frmMessage.ShowDialog();
@@ -546,6 +824,8 @@ namespace Hot_Snap
 
         private void btnPatch_Click(object sender, EventArgs e)
         {
+            string appDataPath = @"%APPDATA%\..\LocalLow\Second Dinner\Snap\com.unity.addressables\";
+            bool access = false;
             if (String.IsNullOrEmpty(Properties.Settings.Default.snapLocation))
             {
                 MessageBox.Show("Snap Folder not set");
@@ -577,12 +857,39 @@ namespace Hot_Snap
                     Thread.Sleep(5000);
                 }
 
-                string appDataPath = @"%APPDATA%\..\LocalLow\Second Dinner\Snap\com.unity.addressables\";
-                if (File.Exists(Environment.ExpandEnvironmentVariables(appDataPath) + taskFiles[0].Name.ToString()))
-                    File.Delete(Environment.ExpandEnvironmentVariables(appDataPath) + taskFiles[0].Name.ToString());
-                File.Copy(catalogDir + patchedfile, Environment.ExpandEnvironmentVariables(appDataPath) + taskFiles[0].Name.ToString());
-                File.Delete(catalogDir + patchedfile);
+                //Check if user has access to AppData folder
+                if (Directory.Exists(Environment.ExpandEnvironmentVariables(appDataPath)))
+                {
+                    try
+                    {
+                        StreamWriter file = new StreamWriter(Environment.ExpandEnvironmentVariables(appDataPath) + @"\writeTest.txt");
+                        file.WriteLine("Test");
+                        file.Close();
+                        File.Delete(Environment.ExpandEnvironmentVariables(appDataPath) + @"\writeTest.txt");
+                        access = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.Message.ToString().Contains("A required privilege is not held by the client"))
+                            MessageBox.Show("Unable to copy patched JSON to AppData folder.\n\n" +
+                                "Either run the tool as 'Admin' and try again or \n" + 
+                                "Go to game directory, look for 'MockCdn' folder, copy the file '" + taskFiles[0].Name.ToString() + ".patched' along with the '.hash' file\n" +
+                                "and paste it under 'AppData\\LocalLow\\Second Dinner\\Snap\\com.unity.addressables' \n" +
+                                "and rename '.patched' to only .json", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        else
+                            MessageBox.Show(ex.Message);
+                    }
+                }
 
+                //if user has access, then delete after copying over to AppData, otherwise let user take manual action
+                if (access)
+                {
+                    if (File.Exists(Environment.ExpandEnvironmentVariables(appDataPath) + taskFiles[0].Name.ToString()))
+                        File.Delete(Environment.ExpandEnvironmentVariables(appDataPath) + taskFiles[0].Name.ToString());
+                    File.Copy(catalogDir + patchedfile, Environment.ExpandEnvironmentVariables(appDataPath) + taskFiles[0].Name.ToString());
+                    File.Copy(catalogDir + taskFiles[0].Name.ToString().Replace(".json",".hash"), Environment.ExpandEnvironmentVariables(appDataPath) + taskFiles[0].Name.ToString().Replace(".json", ".hash"));
+                    File.Delete(catalogDir + patchedfile);
+                }
                 MessageBox.Show("JSON Patched");
             }
             catch (Exception ex)
@@ -595,12 +902,6 @@ namespace Hot_Snap
         private void btnGuide_Click(object sender, EventArgs e)
         {
             tabControl1.SelectTab(tabPage6);
-        }
-
-        private void dgv_cards_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //flow_variants.Dispose();
-            //lblNoVariants.Visible =false;   
         }
 
         private void btnPull_Click(object sender, EventArgs e)
@@ -634,8 +935,24 @@ namespace Hot_Snap
 
         private void btnBrowseScreenshot_Click(object sender, EventArgs e)
         {
-            //TODO
-            
+            dlg_screenshot.Filter = "PNG|*.png";
+
+            DialogResult result = dlg_screenshot.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                Bitmap bmp = new Bitmap(dlg_screenshot.FileName);
+                Console.WriteLine(bmp.Width);
+                if (bmp.Width > bmp.Height)
+                {
+                    MessageBox.Show("Please select a portrait image for thumbnail, see below for optimum image size:\n\n"
+                    + "1. Dimension 520 x 620\n2. Aspect Ratio 26:31\n3. Mode Portrait", "Image size issue", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    pic_upload.Image = null;
+                    return;
+                }
+                pic_upload.Image = new Bitmap(dlg_screenshot.FileName);
+                pic_upload.SizeMode = PictureBoxSizeMode.Zoom;
+            }
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -654,21 +971,83 @@ namespace Hot_Snap
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            Process.Start("https://www.google.com");
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            Process.Start("https://www.google.com");
         }
 
         private void btnPullDeck_Click(object sender, EventArgs e)
         {
-            //flow_variants.Controls.Clear();
-            //lblNoVariants.Visible = false;
-            //lblInstalled.Visible = false;
-            //lblDblClick.Visible = false;
+            flow_deck.Controls.Clear();
+            lblNoDecks.Visible = false;
+            lblInstalledDeck.Visible = false;
+            lblDblClickDeck.Visible = false;
             RetrievePreview(@"Cardbacks/", dgv_decks);
         }
+
+        private void MainMenu_Shown(object sender, EventArgs e)
+        {
+            var mm = new MainMenu();
+            Point mainFrmPoint = new Point(this.Location.X+100, this.Location.Y+200);
+            Message frmMessage = new Message(Properties.Resources.App_Banner, 2500);
+            frmMessage.Size = this.Size;
+            frmMessage.StartPosition = this.StartPosition;
+            frmMessage.Location = mainFrmPoint; 
+            frmMessage.ShowDialog();
+        }
+
+        private void dgv_decks_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            flow_deck.Controls.Clear();
+            lblNoDecks.Visible = false;
+            lblInstalledDeck.Visible = false;
+            lblDblClickDeck.Visible = false;
+            RetrievePreview(@"Cardbacks/", dgv_decks);
+        }
+
+        private void btnRestore_Click(object sender, EventArgs e)
+        {
+            RestoreBackup();
+        }
+
+        private void btnRestoreDeck_Click(object sender, EventArgs e)
+        {
+            RestoreBackup();
+        }
+
+        private void RestoreBackup()
+        {
+            string cardSelected = dgv_cards.CurrentRow.Cells[1].Value.ToString();
+            string backupPath = Path.Combine(Environment.CurrentDirectory, "Backup");
+            if (File.Exists(backupPath + "\\" + cardSelected))
+            {
+                //Check MockCdn has this matching backup
+
+                //Option: copy the old hash and replace with new hash
+                MessageBox.Show("This will restore the original file that was automatically backed up before a custom variant was installed"+
+                    "\nIf the restored backup is not correct in-game, delete the file respective .bundle from the Backup folder" +
+                    "\nAnother way to restore all files is via Steam Game Properties and selecting 'Verify integrity of game files'" +
+                    "\n\nRestore backup using existing file?", "Backup found", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+                //if DialogResult.Ok
+
+                //Copy file from /Backup/
+                //Paste to MockCdn, overwrite true
+                string snapFolder = Properties.Settings.Default.snapLocation + @"\SNAP_Data\StreamingAssets\aa\StandaloneWindows64\MockCdn";
+                File.Copy(Path.Combine(backupPath, cardSelected), Path.Combine(snapFolder, cardSelected), true);
+
+                //Emote Pop Up
+                var mm = new MainMenu();
+                Point mouse_pt = new Point(MousePosition.X, MousePosition.Y-200);
+                Message frmMessage = new Message(Properties.Resources.HulkThing_FistBump, 2000);
+                frmMessage.StartPosition = FormStartPosition.Manual;
+                frmMessage.Location = mouse_pt;
+                frmMessage.ShowDialog();
+            }
+        }
+
     }
 }

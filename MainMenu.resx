@@ -206,7 +206,7 @@ Combo Layers
   <data name="pictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAABbAAAAFeCAYAAABU2TlaAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DgAACw4BQL7hQQAA/7JJREFUeF7s/QfcL0V594/7en5PseTRRFFAEDjt7vepcCgHKXZFVKKoscQeRWyx
+        DAAACwwBP0AiyAAA/7JJREFUeF7s/QfcL0V594/7en5PseTRRFFAEDjt7vepcCgHKXZFVKKoscQeRWyx
         InaNxgJ2Y8GuUWNBFMWCKEUUEemIYo81lmgSUVTg+n/e1zXX7ux+93uXwzkIef7n9Xq/ts3Ozs7OzM68
         v3P2vsGa2X1s9ezeYvPCzNTs5azR/ok52Nsm54Optft0yP2E6aBrwpoRNlf0juk8GImrT55POqf3dFZN
         bnJWNmxsyGPj4fzrA3tV9Le7rC749tRetnJqzwa2u8+7x/TCrKoYOj6Ix61yuCAqq2MYKSsVE3P72MR8
@@ -13271,7 +13271,7 @@ Combo Layers
         m10DywfODjoMXrjleuvyba/b1++svDMwFDJ0dzhyeOQu++7kvaR7L+9n3J9/sOkh+mHhI6lH5Y+VHtf9
         qPdj64jlyJlR19G+J0FPHoyxxp7/lP7Th/H8p+Sn5ROqE42TZpOnp9ynbj5b/Wz8eerz+emCn6V/rn6h
         ++K7Xxx/6ZtZNTP+kv9y4dfiV/Kvjrxe9rp71n/28ZvkN/NzhW/l3x59x3jX+z7s/cR85gfsh4qPeh+7
-        Pnl/eriQvLDwG/eE8/s6uL5TAAAACXBIWXMAAAsOAAALDgFAvuFBAAD1RUlEQVR4Xuz9CXhT5732jd77
+        Pnl/eriQvLDwG/eE8/s6uL5TAAAACXBIWXMAAAsMAAALDAE/QCLIAAD1RUlEQVR4Xuz9CXhT5732jd77
         Pe/Ze4fB8zzKkmUNlixbluV5HvE84wFssDEGB0wMhDHMECBACIQQCIFQCAQCDYUAJZSQQ8hLyCGEfIQQ
         SqCE0oSmKaVQSmkCPN/9LEnGYdN9+r5fu8+1rwsufteztLS0tLT0rOf3v5eWZAghHvOYxzzmMY95zH9j
         HjnzMY95zGMe85jH/PfhkTMf85jHPOYxj3nMfx8eOfMxj3nMYx7zmMf89+GRMx/zmMc85jGPecx/Hx45
@@ -21912,7 +21912,7 @@ Combo Layers
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACm
-        DQAAAk1TRnQBSQFMAgEBBQEAAVgBAAFYAQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        DQAAAk1TRnQBSQFMAgEBBQEAAagBAAGoAQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAASADAAEBAQABCAYAAQgYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -21973,11 +21973,14 @@ Combo Layers
         AQMB4AEHAcABBwHAAQcB8AEPCw==
 </value>
   </data>
-  <metadata name="dialog_snapLoc.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="dlg_snapLoc.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="diag_fileUpload.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="dlg_fileUpload.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>153, 17</value>
+  </metadata>
+  <metadata name="dlg_screenshot.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>415, 17</value>
   </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

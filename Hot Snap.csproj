@@ -105,13 +105,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\nsfw.png" />
+    <None Include="Resources\App-Banner.png" />
+    <None Include="Resources\GitHub-Banner.png" />
     <None Include="Resources\image.ico" />
-    <None Include="bin\Debug\nsfw.png" />
     <Content Include="easy%281%29.ico" />
     <None Include="Resources\HotSnap.ico" />
     <None Include="Resources\HulkThing_FistBump.png" />
     <None Include="Resources\Uploaded_Thanos.png" />
     <None Include="Resources\Thanos_Snap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -82,5 +82,17 @@ namespace Hot_Snap.Properties {
                 this["capturePop"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool offline {
+            get {
+                return ((bool)(this["offline"]));
+            }
+            set {
+                this["offline"] = value;
+            }
+        }
     }
 }

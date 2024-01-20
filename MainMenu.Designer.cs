@@ -32,24 +32,35 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button2 = new System.Windows.Forms.Button();
-            this.lblDblClick = new System.Windows.Forms.Label();
-            this.lblInstalled = new System.Windows.Forms.Label();
+            this.btnRestore = new System.Windows.Forms.Button();
             this.lblNoVariants = new System.Windows.Forms.Label();
             this.btnPull = new System.Windows.Forms.Button();
             this.dgv_cards = new System.Windows.Forms.DataGridView();
             this.flow_variants = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblDblClick = new System.Windows.Forms.Label();
+            this.lblInstalled = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label22 = new System.Windows.Forms.Label();
+            this.btnRestoreDeck = new System.Windows.Forms.Button();
+            this.lblNoDecks = new System.Windows.Forms.Label();
+            this.lblInstalledDeck = new System.Windows.Forms.Label();
+            this.lblDblClickDeck = new System.Windows.Forms.Label();
             this.btnPullDeck = new System.Windows.Forms.Button();
             this.flow_deck = new System.Windows.Forms.FlowLayoutPanel();
             this.dgv_decks = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.radDeck = new System.Windows.Forms.RadioButton();
-            this.radVariant = new System.Windows.Forms.RadioButton();
+            this.label25 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.radUpLocal = new System.Windows.Forms.RadioButton();
+            this.radUpGitHub = new System.Windows.Forms.RadioButton();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.btnReset = new System.Windows.Forms.Button();
+            this.radDeck = new System.Windows.Forms.RadioButton();
             this.lblCardSelected = new System.Windows.Forms.Label();
+            this.radVariant = new System.Windows.Forms.RadioButton();
             this.label6 = new System.Windows.Forms.Label();
+            this.btnUpload = new System.Windows.Forms.Button();
             this.txtBundleLoc = new System.Windows.Forms.TextBox();
             this.chkUploadNsfw = new System.Windows.Forms.CheckBox();
             this.btnBrowseBundle = new System.Windows.Forms.Button();
@@ -58,12 +69,10 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.btnReset = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnUpload = new System.Windows.Forms.Button();
             this.btnBrowseScreenshot = new System.Windows.Forms.Button();
             this.btnCapture = new System.Windows.Forms.Button();
             this.pic_upload = new System.Windows.Forms.PictureBox();
@@ -106,8 +115,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.imgList_icons = new System.Windows.Forms.ImageList(this.components);
-            this.dialog_snapLoc = new System.Windows.Forms.FolderBrowserDialog();
-            this.diag_fileUpload = new System.Windows.Forms.OpenFileDialog();
+            this.dlg_snapLoc = new System.Windows.Forms.FolderBrowserDialog();
+            this.dlg_fileUpload = new System.Windows.Forms.OpenFileDialog();
+            this.dlg_screenshot = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_cards)).BeginInit();
@@ -115,6 +125,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_decks)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_upload)).BeginInit();
             this.tabPage6.SuspendLayout();
@@ -151,13 +162,13 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.button2);
-            this.tabPage1.Controls.Add(this.lblDblClick);
-            this.tabPage1.Controls.Add(this.lblInstalled);
+            this.tabPage1.Controls.Add(this.btnRestore);
             this.tabPage1.Controls.Add(this.lblNoVariants);
             this.tabPage1.Controls.Add(this.btnPull);
             this.tabPage1.Controls.Add(this.dgv_cards);
             this.tabPage1.Controls.Add(this.flow_variants);
+            this.tabPage1.Controls.Add(this.lblDblClick);
+            this.tabPage1.Controls.Add(this.lblInstalled);
             this.tabPage1.ImageIndex = 1;
             this.tabPage1.Location = new System.Drawing.Point(4, 30);
             this.tabPage1.Name = "tabPage1";
@@ -167,48 +178,19 @@
             this.tabPage1.Text = "Card Variants";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnRestore
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.BackColor = System.Drawing.Color.Gainsboro;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(0, 623);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(78, 25);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Restore";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // lblDblClick
-            // 
-            this.lblDblClick.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblDblClick.BackColor = System.Drawing.Color.LightBlue;
-            this.lblDblClick.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblDblClick.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblDblClick.Location = new System.Drawing.Point(154, 623);
-            this.lblDblClick.Name = "lblDblClick";
-            this.lblDblClick.Size = new System.Drawing.Size(822, 25);
-            this.lblDblClick.TabIndex = 4;
-            this.lblDblClick.Text = "Variants found, double click to install";
-            this.lblDblClick.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblDblClick.Visible = false;
-            // 
-            // lblInstalled
-            // 
-            this.lblInstalled.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblInstalled.BackColor = System.Drawing.Color.ForestGreen;
-            this.lblInstalled.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblInstalled.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblInstalled.Location = new System.Drawing.Point(154, 623);
-            this.lblInstalled.Name = "lblInstalled";
-            this.lblInstalled.Size = new System.Drawing.Size(822, 25);
-            this.lblInstalled.TabIndex = 3;
-            this.lblInstalled.Text = "Variant Installed!";
-            this.lblInstalled.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblInstalled.Visible = false;
+            this.btnRestore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRestore.BackColor = System.Drawing.Color.Gainsboro;
+            this.btnRestore.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnRestore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRestore.Location = new System.Drawing.Point(78, 622);
+            this.btnRestore.Name = "btnRestore";
+            this.btnRestore.Size = new System.Drawing.Size(77, 25);
+            this.btnRestore.TabIndex = 5;
+            this.btnRestore.Text = "Restore";
+            this.btnRestore.UseVisualStyleBackColor = false;
+            this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
             // 
             // lblNoVariants
             // 
@@ -217,9 +199,9 @@
             this.lblNoVariants.BackColor = System.Drawing.Color.Firebrick;
             this.lblNoVariants.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblNoVariants.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblNoVariants.Location = new System.Drawing.Point(154, 623);
+            this.lblNoVariants.Location = new System.Drawing.Point(174, 623);
             this.lblNoVariants.Name = "lblNoVariants";
-            this.lblNoVariants.Size = new System.Drawing.Size(822, 25);
+            this.lblNoVariants.Size = new System.Drawing.Size(802, 25);
             this.lblNoVariants.TabIndex = 0;
             this.lblNoVariants.Text = "No custom variants found";
             this.lblNoVariants.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -232,9 +214,9 @@
             this.btnPull.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnPull.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPull.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnPull.Location = new System.Drawing.Point(77, 623);
+            this.btnPull.Location = new System.Drawing.Point(0, 622);
             this.btnPull.Name = "btnPull";
-            this.btnPull.Size = new System.Drawing.Size(78, 25);
+            this.btnPull.Size = new System.Drawing.Size(77, 25);
             this.btnPull.TabIndex = 2;
             this.btnPull.Text = "Pull";
             this.btnPull.UseVisualStyleBackColor = false;
@@ -256,9 +238,8 @@
             this.dgv_cards.Name = "dgv_cards";
             this.dgv_cards.ReadOnly = true;
             this.dgv_cards.RowHeadersVisible = false;
-            this.dgv_cards.Size = new System.Drawing.Size(155, 622);
+            this.dgv_cards.Size = new System.Drawing.Size(175, 622);
             this.dgv_cards.TabIndex = 0;
-            this.dgv_cards.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_cards_CellClick);
             this.dgv_cards.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_cards_CellContentDoubleClick);
             // 
             // flow_variants
@@ -269,14 +250,47 @@
             this.flow_variants.AutoScroll = true;
             this.flow_variants.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.flow_variants.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flow_variants.Location = new System.Drawing.Point(154, 0);
+            this.flow_variants.Location = new System.Drawing.Point(174, 0);
             this.flow_variants.Name = "flow_variants";
-            this.flow_variants.Size = new System.Drawing.Size(822, 622);
+            this.flow_variants.Size = new System.Drawing.Size(831, 622);
             this.flow_variants.TabIndex = 1;
+            // 
+            // lblDblClick
+            // 
+            this.lblDblClick.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDblClick.BackColor = System.Drawing.Color.LightBlue;
+            this.lblDblClick.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblDblClick.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblDblClick.Location = new System.Drawing.Point(174, 623);
+            this.lblDblClick.Name = "lblDblClick";
+            this.lblDblClick.Size = new System.Drawing.Size(802, 25);
+            this.lblDblClick.TabIndex = 4;
+            this.lblDblClick.Text = "Variants found, double click to install";
+            this.lblDblClick.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblDblClick.Visible = false;
+            // 
+            // lblInstalled
+            // 
+            this.lblInstalled.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblInstalled.BackColor = System.Drawing.Color.ForestGreen;
+            this.lblInstalled.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblInstalled.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblInstalled.Location = new System.Drawing.Point(174, 623);
+            this.lblInstalled.Name = "lblInstalled";
+            this.lblInstalled.Size = new System.Drawing.Size(802, 25);
+            this.lblInstalled.TabIndex = 3;
+            this.lblInstalled.Text = "Variant Installed!";
+            this.lblInstalled.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblInstalled.Visible = false;
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.label22);
+            this.tabPage2.Controls.Add(this.btnRestoreDeck);
+            this.tabPage2.Controls.Add(this.lblNoDecks);
+            this.tabPage2.Controls.Add(this.lblInstalledDeck);
+            this.tabPage2.Controls.Add(this.lblDblClickDeck);
             this.tabPage2.Controls.Add(this.btnPullDeck);
             this.tabPage2.Controls.Add(this.flow_deck);
             this.tabPage2.Controls.Add(this.dgv_decks);
@@ -289,20 +303,64 @@
             this.tabPage2.Text = "Decks";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // label22
+            // btnRestoreDeck
             // 
-            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.btnRestoreDeck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRestoreDeck.BackColor = System.Drawing.Color.Gainsboro;
+            this.btnRestoreDeck.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnRestoreDeck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRestoreDeck.Location = new System.Drawing.Point(78, 622);
+            this.btnRestoreDeck.Name = "btnRestoreDeck";
+            this.btnRestoreDeck.Size = new System.Drawing.Size(77, 25);
+            this.btnRestoreDeck.TabIndex = 8;
+            this.btnRestoreDeck.Text = "Restore";
+            this.btnRestoreDeck.UseVisualStyleBackColor = false;
+            this.btnRestoreDeck.Click += new System.EventHandler(this.btnRestoreDeck_Click);
+            // 
+            // lblNoDecks
+            // 
+            this.lblNoDecks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label22.BackColor = System.Drawing.Color.LightBlue;
-            this.label22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label22.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label22.Location = new System.Drawing.Point(154, 623);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(822, 25);
-            this.label22.TabIndex = 5;
-            this.label22.Text = "Variants found, double click to install";
-            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label22.Visible = false;
+            this.lblNoDecks.BackColor = System.Drawing.Color.Firebrick;
+            this.lblNoDecks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblNoDecks.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblNoDecks.Location = new System.Drawing.Point(174, 623);
+            this.lblNoDecks.Name = "lblNoDecks";
+            this.lblNoDecks.Size = new System.Drawing.Size(802, 25);
+            this.lblNoDecks.TabIndex = 7;
+            this.lblNoDecks.Text = "No custom decks found";
+            this.lblNoDecks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblNoDecks.Visible = false;
+            // 
+            // lblInstalledDeck
+            // 
+            this.lblInstalledDeck.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblInstalledDeck.BackColor = System.Drawing.Color.ForestGreen;
+            this.lblInstalledDeck.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblInstalledDeck.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblInstalledDeck.Location = new System.Drawing.Point(174, 623);
+            this.lblInstalledDeck.Name = "lblInstalledDeck";
+            this.lblInstalledDeck.Size = new System.Drawing.Size(802, 25);
+            this.lblInstalledDeck.TabIndex = 6;
+            this.lblInstalledDeck.Text = "Deck Installed!";
+            this.lblInstalledDeck.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblInstalledDeck.Visible = false;
+            // 
+            // lblDblClickDeck
+            // 
+            this.lblDblClickDeck.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDblClickDeck.BackColor = System.Drawing.Color.LightBlue;
+            this.lblDblClickDeck.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblDblClickDeck.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblDblClickDeck.Location = new System.Drawing.Point(174, 623);
+            this.lblDblClickDeck.Name = "lblDblClickDeck";
+            this.lblDblClickDeck.Size = new System.Drawing.Size(802, 25);
+            this.lblDblClickDeck.TabIndex = 5;
+            this.lblDblClickDeck.Text = "Variants found, double click to install";
+            this.lblDblClickDeck.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblDblClickDeck.Visible = false;
             // 
             // btnPullDeck
             // 
@@ -311,9 +369,9 @@
             this.btnPullDeck.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnPullDeck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPullDeck.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnPullDeck.Location = new System.Drawing.Point(77, 623);
+            this.btnPullDeck.Location = new System.Drawing.Point(0, 622);
             this.btnPullDeck.Name = "btnPullDeck";
-            this.btnPullDeck.Size = new System.Drawing.Size(78, 25);
+            this.btnPullDeck.Size = new System.Drawing.Size(77, 25);
             this.btnPullDeck.TabIndex = 3;
             this.btnPullDeck.Text = "Pull";
             this.btnPullDeck.UseVisualStyleBackColor = false;
@@ -326,9 +384,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flow_deck.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.flow_deck.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flow_deck.Location = new System.Drawing.Point(154, 0);
+            this.flow_deck.Location = new System.Drawing.Point(174, 0);
             this.flow_deck.Name = "flow_deck";
-            this.flow_deck.Size = new System.Drawing.Size(822, 622);
+            this.flow_deck.Size = new System.Drawing.Size(802, 622);
             this.flow_deck.TabIndex = 1;
             // 
             // dgv_decks
@@ -347,20 +405,18 @@
             this.dgv_decks.Name = "dgv_decks";
             this.dgv_decks.ReadOnly = true;
             this.dgv_decks.RowHeadersVisible = false;
-            this.dgv_decks.Size = new System.Drawing.Size(155, 622);
+            this.dgv_decks.Size = new System.Drawing.Size(175, 622);
             this.dgv_decks.TabIndex = 0;
+            this.dgv_decks.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_decks_CellContentDoubleClick);
             // 
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.tabPage3.Controls.Add(this.radDeck);
-            this.tabPage3.Controls.Add(this.radVariant);
+            this.tabPage3.Controls.Add(this.label25);
             this.tabPage3.Controls.Add(this.panel1);
-            this.tabPage3.Controls.Add(this.btnReset);
             this.tabPage3.Controls.Add(this.groupBox1);
             this.tabPage3.Controls.Add(this.label5);
             this.tabPage3.Controls.Add(this.label3);
-            this.tabPage3.Controls.Add(this.btnUpload);
             this.tabPage3.Controls.Add(this.btnBrowseScreenshot);
             this.tabPage3.Controls.Add(this.btnCapture);
             this.tabPage3.Controls.Add(this.pic_upload);
@@ -371,33 +427,27 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Upload";
             // 
-            // radDeck
+            // label25
             // 
-            this.radDeck.AutoSize = true;
-            this.radDeck.Location = new System.Drawing.Point(393, 133);
-            this.radDeck.Name = "radDeck";
-            this.radDeck.Size = new System.Drawing.Size(55, 18);
-            this.radDeck.TabIndex = 19;
-            this.radDeck.Text = "Deck";
-            this.radDeck.UseVisualStyleBackColor = true;
-            // 
-            // radVariant
-            // 
-            this.radVariant.AutoSize = true;
-            this.radVariant.Checked = true;
-            this.radVariant.Location = new System.Drawing.Point(318, 133);
-            this.radVariant.Name = "radVariant";
-            this.radVariant.Size = new System.Drawing.Size(69, 18);
-            this.radVariant.TabIndex = 18;
-            this.radVariant.TabStop = true;
-            this.radVariant.Text = "Variant";
-            this.radVariant.UseVisualStyleBackColor = true;
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(63, 484);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(201, 14);
+            this.label25.TabIndex = 26;
+            this.label25.Text = "Recommended Size: 520 x 620";
             // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Controls.Add(this.label24);
+            this.panel1.Controls.Add(this.label23);
+            this.panel1.Controls.Add(this.btnReset);
+            this.panel1.Controls.Add(this.radDeck);
             this.panel1.Controls.Add(this.lblCardSelected);
+            this.panel1.Controls.Add(this.radVariant);
             this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.btnUpload);
             this.panel1.Controls.Add(this.txtBundleLoc);
             this.panel1.Controls.Add(this.chkUploadNsfw);
             this.panel1.Controls.Add(this.btnBrowseBundle);
@@ -409,8 +459,81 @@
             this.panel1.Cursor = System.Windows.Forms.Cursors.Default;
             this.panel1.Location = new System.Drawing.Point(318, 156);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(375, 290);
+            this.panel1.Size = new System.Drawing.Size(472, 334);
             this.panel1.TabIndex = 17;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.radUpLocal);
+            this.panel2.Controls.Add(this.radUpGitHub);
+            this.panel2.Location = new System.Drawing.Point(22, 267);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(225, 25);
+            this.panel2.TabIndex = 28;
+            // 
+            // radUpLocal
+            // 
+            this.radUpLocal.AutoSize = true;
+            this.radUpLocal.Checked = true;
+            this.radUpLocal.Location = new System.Drawing.Point(3, 3);
+            this.radUpLocal.Name = "radUpLocal";
+            this.radUpLocal.Size = new System.Drawing.Size(93, 18);
+            this.radUpLocal.TabIndex = 26;
+            this.radUpLocal.TabStop = true;
+            this.radUpLocal.Text = "Local Drive";
+            this.radUpLocal.UseVisualStyleBackColor = true;
+            // 
+            // radUpGitHub
+            // 
+            this.radUpGitHub.AutoSize = true;
+            this.radUpGitHub.Location = new System.Drawing.Point(102, 3);
+            this.radUpGitHub.Name = "radUpGitHub";
+            this.radUpGitHub.Size = new System.Drawing.Size(103, 18);
+            this.radUpGitHub.TabIndex = 27;
+            this.radUpGitHub.Text = "GitHub Repo";
+            this.radUpGitHub.UseVisualStyleBackColor = true;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(3, 250);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(90, 14);
+            this.label24.TabIndex = 25;
+            this.label24.Text = "6. Upload To:";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(3, 9);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(100, 14);
+            this.label23.TabIndex = 24;
+            this.label23.Text = "1. Upload Type";
+            // 
+            // btnReset
+            // 
+            this.btnReset.BackColor = System.Drawing.Color.DimGray;
+            this.btnReset.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReset.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnReset.Location = new System.Drawing.Point(308, 301);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(75, 25);
+            this.btnReset.TabIndex = 15;
+            this.btnReset.Text = "Reset";
+            this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
+            // radDeck
+            // 
+            this.radDeck.AutoSize = true;
+            this.radDeck.Location = new System.Drawing.Point(124, 28);
+            this.radDeck.Name = "radDeck";
+            this.radDeck.Size = new System.Drawing.Size(55, 18);
+            this.radDeck.TabIndex = 19;
+            this.radDeck.Text = "Deck";
+            this.radDeck.UseVisualStyleBackColor = true;
             // 
             // lblCardSelected
             // 
@@ -418,31 +541,58 @@
             this.lblCardSelected.BackColor = System.Drawing.SystemColors.Control;
             this.lblCardSelected.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCardSelected.ForeColor = System.Drawing.Color.DarkGreen;
-            this.lblCardSelected.Location = new System.Drawing.Point(19, 117);
+            this.lblCardSelected.Location = new System.Drawing.Point(28, 124);
             this.lblCardSelected.Name = "lblCardSelected";
             this.lblCardSelected.Size = new System.Drawing.Size(0, 14);
             this.lblCardSelected.TabIndex = 23;
             // 
+            // radVariant
+            // 
+            this.radVariant.AutoSize = true;
+            this.radVariant.Checked = true;
+            this.radVariant.Location = new System.Drawing.Point(22, 28);
+            this.radVariant.Name = "radVariant";
+            this.radVariant.Size = new System.Drawing.Size(69, 18);
+            this.radVariant.TabIndex = 18;
+            this.radVariant.TabStop = true;
+            this.radVariant.Text = "Variant";
+            this.radVariant.UseVisualStyleBackColor = true;
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 14);
+            this.label6.Location = new System.Drawing.Point(3, 51);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(169, 14);
             this.label6.TabIndex = 6;
             this.label6.Text = "2. File to upload (.bundle)";
             // 
+            // btnUpload
+            // 
+            this.btnUpload.BackColor = System.Drawing.Color.ForestGreen;
+            this.btnUpload.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnUpload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpload.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpload.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnUpload.Location = new System.Drawing.Point(389, 301);
+            this.btnUpload.Name = "btnUpload";
+            this.btnUpload.Size = new System.Drawing.Size(75, 25);
+            this.btnUpload.TabIndex = 9;
+            this.btnUpload.Text = "Upload";
+            this.btnUpload.UseVisualStyleBackColor = false;
+            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
+            // 
             // txtBundleLoc
             // 
-            this.txtBundleLoc.Location = new System.Drawing.Point(10, 30);
+            this.txtBundleLoc.Location = new System.Drawing.Point(22, 68);
             this.txtBundleLoc.Name = "txtBundleLoc";
-            this.txtBundleLoc.Size = new System.Drawing.Size(352, 22);
+            this.txtBundleLoc.Size = new System.Drawing.Size(361, 22);
             this.txtBundleLoc.TabIndex = 7;
             // 
             // chkUploadNsfw
             // 
             this.chkUploadNsfw.AutoSize = true;
-            this.chkUploadNsfw.Location = new System.Drawing.Point(204, 254);
+            this.chkUploadNsfw.Location = new System.Drawing.Point(141, 215);
             this.chkUploadNsfw.Name = "chkUploadNsfw";
             this.chkUploadNsfw.Size = new System.Drawing.Size(15, 14);
             this.chkUploadNsfw.TabIndex = 20;
@@ -454,7 +604,7 @@
             this.btnBrowseBundle.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnBrowseBundle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowseBundle.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnBrowseBundle.Location = new System.Drawing.Point(287, 56);
+            this.btnBrowseBundle.Location = new System.Drawing.Point(389, 66);
             this.btnBrowseBundle.Name = "btnBrowseBundle";
             this.btnBrowseBundle.Size = new System.Drawing.Size(75, 25);
             this.btnBrowseBundle.TabIndex = 8;
@@ -465,7 +615,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(7, 254);
+            this.label15.Location = new System.Drawing.Point(3, 214);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(132, 14);
             this.label15.TabIndex = 19;
@@ -473,7 +623,7 @@
             // 
             // txtVariantName
             // 
-            this.txtVariantName.Location = new System.Drawing.Point(10, 173);
+            this.txtVariantName.Location = new System.Drawing.Point(22, 163);
             this.txtVariantName.MaxLength = 20;
             this.txtVariantName.Name = "txtVariantName";
             this.txtVariantName.Size = new System.Drawing.Size(292, 22);
@@ -482,44 +632,30 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(7, 95);
+            this.label10.Location = new System.Drawing.Point(3, 102);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(150, 14);
+            this.label10.Size = new System.Drawing.Size(145, 14);
             this.label10.TabIndex = 16;
-            this.label10.Text = "3.Verify Card Selected:";
+            this.label10.Text = "3. Verify File Selected:";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(7, 156);
+            this.label8.Location = new System.Drawing.Point(3, 146);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(182, 14);
+            this.label8.Size = new System.Drawing.Size(310, 14);
             this.label8.TabIndex = 12;
-            this.label8.Text = "4. Variant Name (File Name)";
+            this.label8.Text = "4. Variant Name (e.g. Baby, Anime, Artgerm, etc)";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(10, 198);
+            this.label4.Location = new System.Drawing.Point(22, 188);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(292, 14);
             this.label4.TabIndex = 14;
             this.label4.Text = "(A-Z 0-9  only; no special characters or spaces)";
-            // 
-            // btnReset
-            // 
-            this.btnReset.BackColor = System.Drawing.Color.DimGray;
-            this.btnReset.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReset.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnReset.Location = new System.Drawing.Point(537, 454);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(75, 25);
-            this.btnReset.TabIndex = 15;
-            this.btnReset.Text = "Reset";
-            this.btnReset.UseVisualStyleBackColor = false;
-            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // groupBox1
             // 
@@ -545,11 +681,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(37, 139);
+            this.label5.Location = new System.Drawing.Point(95, 139);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(148, 14);
+            this.label5.Size = new System.Drawing.Size(132, 14);
             this.label5.TabIndex = 5;
-            this.label5.Text = "1. Preview Screenshot";
+            this.label5.Text = "Preview Screenshot";
             // 
             // label3
             // 
@@ -559,21 +695,6 @@
             this.label3.Size = new System.Drawing.Size(20, 14);
             this.label3.TabIndex = 3;
             this.label3.Text = "or";
-            // 
-            // btnUpload
-            // 
-            this.btnUpload.BackColor = System.Drawing.Color.ForestGreen;
-            this.btnUpload.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnUpload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpload.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpload.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnUpload.Location = new System.Drawing.Point(618, 454);
-            this.btnUpload.Name = "btnUpload";
-            this.btnUpload.Size = new System.Drawing.Size(75, 25);
-            this.btnUpload.TabIndex = 9;
-            this.btnUpload.Text = "Upload";
-            this.btnUpload.UseVisualStyleBackColor = false;
-            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
             // 
             // btnBrowseScreenshot
             // 
@@ -815,7 +936,7 @@
             // chk_skipCaptureMsg
             // 
             this.chk_skipCaptureMsg.AutoSize = true;
-            this.chk_skipCaptureMsg.Location = new System.Drawing.Point(6, 51);
+            this.chk_skipCaptureMsg.Location = new System.Drawing.Point(6, 45);
             this.chk_skipCaptureMsg.Name = "chk_skipCaptureMsg";
             this.chk_skipCaptureMsg.Size = new System.Drawing.Size(347, 18);
             this.chk_skipCaptureMsg.TabIndex = 3;
@@ -825,7 +946,7 @@
             // chk_showNsfw
             // 
             this.chk_showNsfw.AutoSize = true;
-            this.chk_showNsfw.Location = new System.Drawing.Point(6, 27);
+            this.chk_showNsfw.Location = new System.Drawing.Point(6, 21);
             this.chk_showNsfw.Name = "chk_showNsfw";
             this.chk_showNsfw.Size = new System.Drawing.Size(167, 18);
             this.chk_showNsfw.TabIndex = 0;
@@ -1041,9 +1162,13 @@
             this.imgList_icons.Images.SetKeyName(3, "page-up.png");
             this.imgList_icons.Images.SetKeyName(4, "user-guide.png");
             // 
-            // diag_fileUpload
+            // dlg_fileUpload
             // 
-            this.diag_fileUpload.DefaultExt = "bundle";
+            this.dlg_fileUpload.DefaultExt = "bundle";
+            // 
+            // dlg_screenshot
+            // 
+            this.dlg_screenshot.DefaultExt = "png";
             // 
             // MainMenu
             // 
@@ -1053,7 +1178,8 @@
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainMenu";
-            this.Text = "Hot SNAP! (v0.4)";
+            this.Text = "Hot SNAP! (v0.5)";
+            this.Shown += new System.EventHandler(this.MainMenu_Shown);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_cards)).EndInit();
@@ -1063,6 +1189,8 @@
             this.tabPage3.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_upload)).EndInit();
@@ -1094,7 +1222,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.FolderBrowserDialog dialog_snapLoc;
+        private System.Windows.Forms.FolderBrowserDialog dlg_snapLoc;
         private System.Windows.Forms.TextBox txtToken;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnSettingsBrowse;
@@ -1103,7 +1231,7 @@
         private System.Windows.Forms.Button btnSettingsSave;
         private System.Windows.Forms.FlowLayoutPanel flow_variants;
         private System.Windows.Forms.DataGridView dgv_cards;
-        private System.Windows.Forms.OpenFileDialog diag_fileUpload;
+        private System.Windows.Forms.OpenFileDialog dlg_fileUpload;
         private System.Windows.Forms.PictureBox pic_upload;
         private System.Windows.Forms.Button btnCapture;
         private System.Windows.Forms.Label label3;
@@ -1142,7 +1270,7 @@
         private System.Windows.Forms.Button btnPull;
         private System.Windows.Forms.Label lblInstalled;
         private System.Windows.Forms.Label lblDblClick;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnRestore;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.LinkLabel lnk_uabe;
@@ -1163,9 +1291,19 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label lblDblClickDeck;
         private System.Windows.Forms.Button btnPullDeck;
         private System.Windows.Forms.RadioButton radDeck;
         private System.Windows.Forms.RadioButton radVariant;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.RadioButton radUpGitHub;
+        private System.Windows.Forms.RadioButton radUpLocal;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.OpenFileDialog dlg_screenshot;
+        private System.Windows.Forms.Label lblInstalledDeck;
+        private System.Windows.Forms.Label lblNoDecks;
+        private System.Windows.Forms.Button btnRestoreDeck;
     }
 }

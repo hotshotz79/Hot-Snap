@@ -14,22 +14,20 @@ namespace Hot_Snap
     {
         private Timer tmr;
 
-        public Message(Bitmap emote)
+        public Message(Bitmap emote, Int16 displayTime)
         {
             InitializeComponent();
-            
 
             //Set Emote image
             this.SelectBitmap(emote);
 
             //Play Sound
 
-            //Close after 1 second
             tmr = new Timer();
             tmr.Tick += delegate {
                 this.Close();
             };
-            tmr.Interval = 2000;
+            tmr.Interval = displayTime;
             tmr.Start();
         }
 
