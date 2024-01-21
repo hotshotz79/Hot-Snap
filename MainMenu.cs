@@ -13,6 +13,7 @@ using System.Net;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,10 +25,17 @@ namespace Hot_Snap
     {
         public DataTable dtVariants;
         public DataTable dtDecks;
+
         public MainMenu()
         {
             InitializeComponent();            
             LoadSettings();
+            
+            if (txtSnapLocation.Text == "")
+            {
+                MessageBox.Show("Please set the game folder under Settings","Setup Required",MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
+                return;
+            }
             LoadCardList();
             LoadDeckList();
         }
@@ -51,7 +59,8 @@ namespace Hot_Snap
                 dtDecks.Clear();
 
             LoadDeckLocal();
-            LoadDeckGitHub();
+            if (txtToken.Text != "")
+                LoadDeckGitHub();
 
             dtDecks.DefaultView.Sort = "Deck Name asc";
             dgv_decks.DataSource = dtDecks;
@@ -193,8 +202,8 @@ namespace Hot_Snap
                 dtVariants.Clear();
 
             LoadVariantLocal();
-            LoadVariantGitHub();
-
+            if (txtToken.Text != "")
+                LoadVariantGitHub();
             dtVariants.DefaultView.Sort = "Card Name asc";
             dgv_cards.DataSource = dtVariants;
             dgv_cards.Columns[1].Visible = false;
@@ -377,9 +386,10 @@ namespace Hot_Snap
             //Emote Pop Up
             var mm = new MainMenu();
             Point mouse_pt = new Point(MousePosition.X, MousePosition.Y-200);
+            Point mainFrmPoint = new Point(this.Location.X+400, this.Location.Y+400);
             Message frmMessage = new Message(Properties.Resources.HulkThing_FistBump, 2000);
             frmMessage.StartPosition = FormStartPosition.Manual;
-            frmMessage.Location = mouse_pt;
+            frmMessage.Location = mainFrmPoint; //mouse_pt;
             frmMessage.ShowDialog();
         }
 
@@ -741,6 +751,8 @@ namespace Hot_Snap
                     hashVerify = getHash[x].ToString().Replace(".bundle", "");
             }
 
+            Regex rgx = new Regex("[^a-zA-Z0-9]");
+            txtVariantName.Text = rgx.Replace(txtVariantName.Text, "");
             string saveAs =  DateTime.Now.ToString("yyMMdd_HHmmss") + "_" + txtVariantName.Text + "_" + Properties.Settings.Default.username + "_" + hashVerify + ".bundle";
 
             //Copy the bundle from MockCdn to Custom folder
@@ -923,11 +935,6 @@ namespace Hot_Snap
             Process.Start("https://github.com/Perfare/AssetStudio/releases");
         }
 
-        private void lnk_github_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start("https://github.com/settings/profile");
-        }
-
         private void lnk_netRuntime_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://aka.ms/dotnet-core-applaunch?missing_runtime=true&arch=x64&rid=win10-x64&apphost_version=6.0.11");
@@ -969,14 +976,9 @@ namespace Hot_Snap
             chkUploadNsfw.Checked = false;
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start("https://www.google.com");
-        }
-
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://www.google.com");
+            Process.Start("www.discord.com");
         }
 
         private void btnPullDeck_Click(object sender, EventArgs e)
@@ -1049,5 +1051,14 @@ namespace Hot_Snap
             }
         }
 
+        private void lnk_token_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/settings/profile");
+        }
+
+        private void lnk_github_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/hotshotz79/Hot-Snap/");
+        }
     }
 }

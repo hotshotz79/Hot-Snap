@@ -78,7 +78,7 @@
             this.pic_upload = new System.Windows.Forms.PictureBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.lnk_github = new System.Windows.Forms.LinkLabel();
+            this.lnk_token = new System.Windows.Forms.LinkLabel();
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.lnk_studio = new System.Windows.Forms.LinkLabel();
@@ -87,22 +87,26 @@
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.label21 = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.label9 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.chk_skipCaptureMsg = new System.Windows.Forms.CheckBox();
-            this.chk_showNsfw = new System.Windows.Forms.CheckBox();
-            this.btnSettingsSave = new System.Windows.Forms.Button();
+            this.label27 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label26 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.lnk_discord = new System.Windows.Forms.LinkLabel();
+            this.lnk_github = new System.Windows.Forms.LinkLabel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnPatch = new System.Windows.Forms.Button();
             this.lnk_netRuntime = new System.Windows.Forms.LinkLabel();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chk_skipCaptureMsg = new System.Windows.Forms.CheckBox();
+            this.btnSettingsSave = new System.Windows.Forms.Button();
+            this.label22 = new System.Windows.Forms.Label();
+            this.chk_showNsfw = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -113,7 +117,6 @@
             this.btnSettingsBrowse = new System.Windows.Forms.Button();
             this.txtToken = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.imgList_icons = new System.Windows.Forms.ImageList(this.components);
             this.dlg_snapLoc = new System.Windows.Forms.FolderBrowserDialog();
             this.dlg_fileUpload = new System.Windows.Forms.OpenFileDialog();
@@ -132,12 +135,11 @@
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.groupBox2.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -748,7 +750,7 @@
             // 
             // groupBox7
             // 
-            this.groupBox7.Controls.Add(this.lnk_github);
+            this.groupBox7.Controls.Add(this.lnk_token);
             this.groupBox7.Controls.Add(this.label14);
             this.groupBox7.Location = new System.Drawing.Point(515, 16);
             this.groupBox7.Name = "groupBox7";
@@ -757,16 +759,16 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "GitHub Token";
             // 
-            // lnk_github
+            // lnk_token
             // 
-            this.lnk_github.AutoSize = true;
-            this.lnk_github.Location = new System.Drawing.Point(204, 41);
-            this.lnk_github.Name = "lnk_github";
-            this.lnk_github.Size = new System.Drawing.Size(32, 14);
-            this.lnk_github.TabIndex = 4;
-            this.lnk_github.TabStop = true;
-            this.lnk_github.Text = "Link";
-            this.lnk_github.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk_github_LinkClicked);
+            this.lnk_token.AutoSize = true;
+            this.lnk_token.Location = new System.Drawing.Point(204, 41);
+            this.lnk_token.Name = "lnk_token";
+            this.lnk_token.Size = new System.Drawing.Size(32, 14);
+            this.lnk_token.TabIndex = 4;
+            this.lnk_token.TabStop = true;
+            this.lnk_token.Text = "Link";
+            this.lnk_token.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk_token_LinkClicked);
             // 
             // label14
             // 
@@ -840,14 +842,10 @@
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.tabPage4.Controls.Add(this.label21);
-            this.tabPage4.Controls.Add(this.pictureBox2);
-            this.tabPage4.Controls.Add(this.groupBox2);
             this.tabPage4.Controls.Add(this.groupBox5);
-            this.tabPage4.Controls.Add(this.btnSettingsSave);
+            this.tabPage4.Controls.Add(this.groupBox2);
             this.tabPage4.Controls.Add(this.groupBox4);
             this.tabPage4.Controls.Add(this.groupBox3);
-            this.tabPage4.Controls.Add(this.pictureBox1);
             this.tabPage4.ImageIndex = 0;
             this.tabPage4.Location = new System.Drawing.Point(4, 30);
             this.tabPage4.Name = "tabPage4";
@@ -855,117 +853,117 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Settings";
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.label27);
+            this.groupBox5.Controls.Add(this.button1);
+            this.groupBox5.Controls.Add(this.label26);
+            this.groupBox5.Location = new System.Drawing.Point(8, 438);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(464, 153);
+            this.groupBox5.TabIndex = 12;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Clean Up";
+            this.groupBox5.Visible = false;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(7, 49);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(128, 28);
+            this.label27.TabIndex = 3;
+            this.label27.Text = "Duplicate Reasons:\r\n* ";
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.DimGray;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.Control;
+            this.button1.Location = new System.Drawing.Point(378, 94);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 43);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Start";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(7, 22);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(390, 14);
+            this.label26.TabIndex = 0;
+            this.label26.Text = "If the variants show up multiple times, this can help clean up";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.groupBox2.Controls.Add(this.label21);
+            this.groupBox2.Controls.Add(this.lnk_discord);
+            this.groupBox2.Controls.Add(this.lnk_github);
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.pictureBox1);
+            this.groupBox2.Location = new System.Drawing.Point(478, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(490, 428);
+            this.groupBox2.TabIndex = 11;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "About";
+            // 
             // label21
             // 
             this.label21.AutoSize = true;
             this.label21.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.label21.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label21.Location = new System.Drawing.Point(487, 612);
+            this.label21.Location = new System.Drawing.Point(202, 402);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(281, 18);
             this.label21.TabIndex = 14;
             this.label21.Text = "Ongoing: Developer of Hot SNAP!";
             // 
-            // pictureBox2
+            // lnk_discord
             // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(4, 4);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(964, 197);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 13;
-            this.pictureBox2.TabStop = false;
+            this.lnk_discord.AutoSize = true;
+            this.lnk_discord.Location = new System.Drawing.Point(6, 104);
+            this.lnk_discord.Name = "lnk_discord";
+            this.lnk_discord.Size = new System.Drawing.Size(53, 14);
+            this.lnk_discord.TabIndex = 13;
+            this.lnk_discord.TabStop = true;
+            this.lnk_discord.Text = "Discord";
+            this.lnk_discord.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
-            // groupBox2
+            // lnk_github
             // 
-            this.groupBox2.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.groupBox2.Controls.Add(this.linkLabel2);
-            this.groupBox2.Controls.Add(this.linkLabel1);
-            this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Location = new System.Drawing.Point(780, 207);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(188, 397);
-            this.groupBox2.TabIndex = 11;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "About";
-            // 
-            // linkLabel2
-            // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(6, 104);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(53, 14);
-            this.linkLabel2.TabIndex = 13;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "Discord";
-            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(6, 82);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(49, 14);
-            this.linkLabel1.TabIndex = 12;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "GitHub";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.lnk_github.AutoSize = true;
+            this.lnk_github.Location = new System.Drawing.Point(6, 82);
+            this.lnk_github.Name = "lnk_github";
+            this.lnk_github.Size = new System.Drawing.Size(49, 14);
+            this.lnk_github.TabIndex = 12;
+            this.lnk_github.TabStop = true;
+            this.lnk_github.Text = "GitHub";
+            this.lnk_github.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk_github_LinkClicked);
             // 
             // label9
             // 
-            this.label9.Location = new System.Drawing.Point(6, 23);
+            this.label9.Location = new System.Drawing.Point(6, 29);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(176, 371);
             this.label9.TabIndex = 11;
-            this.label9.Text = "Developer: Hotshotz79\r\n\r\nQA / Support: Padjokel\r\n\r\n\r\n\r\n\r\n\r\nHumble Request:\r\n\r\n* P" +
-    "lease do not upload variants of existing art in-game.\r\n\r\n* Support the game by p" +
-    "urchasing those in-game.";
+            this.label9.Text = "Developer: Hotshotz79\r\n\r\nQA / Support: Padjokel\r\n\r\n\r\n\r\n\r\n\r\nHumble Request:\r\n\r\n* S" +
+    "upport the game by purchasing those in-game.";
             // 
-            // groupBox5
+            // pictureBox1
             // 
-            this.groupBox5.Controls.Add(this.chk_skipCaptureMsg);
-            this.groupBox5.Controls.Add(this.chk_showNsfw);
-            this.groupBox5.Location = new System.Drawing.Point(8, 512);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(464, 92);
-            this.groupBox5.TabIndex = 9;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "General";
-            // 
-            // chk_skipCaptureMsg
-            // 
-            this.chk_skipCaptureMsg.AutoSize = true;
-            this.chk_skipCaptureMsg.Location = new System.Drawing.Point(6, 45);
-            this.chk_skipCaptureMsg.Name = "chk_skipCaptureMsg";
-            this.chk_skipCaptureMsg.Size = new System.Drawing.Size(347, 18);
-            this.chk_skipCaptureMsg.TabIndex = 3;
-            this.chk_skipCaptureMsg.Text = "Skip pop-up message when \'Capturing\' screenshot";
-            this.chk_skipCaptureMsg.UseVisualStyleBackColor = true;
-            // 
-            // chk_showNsfw
-            // 
-            this.chk_showNsfw.AutoSize = true;
-            this.chk_showNsfw.Location = new System.Drawing.Point(6, 21);
-            this.chk_showNsfw.Name = "chk_showNsfw";
-            this.chk_showNsfw.Size = new System.Drawing.Size(167, 18);
-            this.chk_showNsfw.TabIndex = 0;
-            this.chk_showNsfw.Text = "Display NSFW variants";
-            this.chk_showNsfw.UseVisualStyleBackColor = true;
-            // 
-            // btnSettingsSave
-            // 
-            this.btnSettingsSave.BackColor = System.Drawing.Color.ForestGreen;
-            this.btnSettingsSave.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnSettingsSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSettingsSave.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnSettingsSave.Location = new System.Drawing.Point(397, 610);
-            this.btnSettingsSave.Name = "btnSettingsSave";
-            this.btnSettingsSave.Size = new System.Drawing.Size(75, 25);
-            this.btnSettingsSave.TabIndex = 6;
-            this.btnSettingsSave.Text = "Save";
-            this.btnSettingsSave.UseVisualStyleBackColor = false;
-            this.btnSettingsSave.Click += new System.EventHandler(this.btnSettingsSave_Click);
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(179, 17);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(305, 374);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 12;
+            this.pictureBox1.TabStop = false;
             // 
             // groupBox4
             // 
@@ -973,7 +971,7 @@
             this.groupBox4.Controls.Add(this.lnk_netRuntime);
             this.groupBox4.Controls.Add(this.label13);
             this.groupBox4.Controls.Add(this.label12);
-            this.groupBox4.Location = new System.Drawing.Point(8, 349);
+            this.groupBox4.Location = new System.Drawing.Point(8, 274);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(464, 157);
             this.groupBox4.TabIndex = 8;
@@ -1029,6 +1027,10 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.chk_skipCaptureMsg);
+            this.groupBox3.Controls.Add(this.btnSettingsSave);
+            this.groupBox3.Controls.Add(this.label22);
+            this.groupBox3.Controls.Add(this.chk_showNsfw);
             this.groupBox3.Controls.Add(this.label11);
             this.groupBox3.Controls.Add(this.label17);
             this.groupBox3.Controls.Add(this.label16);
@@ -1039,12 +1041,55 @@
             this.groupBox3.Controls.Add(this.btnSettingsBrowse);
             this.groupBox3.Controls.Add(this.txtToken);
             this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Location = new System.Drawing.Point(8, 207);
+            this.groupBox3.Location = new System.Drawing.Point(8, 3);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(464, 136);
+            this.groupBox3.Size = new System.Drawing.Size(464, 262);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Requirements";
+            // 
+            // chk_skipCaptureMsg
+            // 
+            this.chk_skipCaptureMsg.AutoSize = true;
+            this.chk_skipCaptureMsg.Location = new System.Drawing.Point(10, 196);
+            this.chk_skipCaptureMsg.Name = "chk_skipCaptureMsg";
+            this.chk_skipCaptureMsg.Size = new System.Drawing.Size(347, 18);
+            this.chk_skipCaptureMsg.TabIndex = 3;
+            this.chk_skipCaptureMsg.Text = "Skip pop-up message when \'Capturing\' screenshot";
+            this.chk_skipCaptureMsg.UseVisualStyleBackColor = true;
+            // 
+            // btnSettingsSave
+            // 
+            this.btnSettingsSave.BackColor = System.Drawing.Color.ForestGreen;
+            this.btnSettingsSave.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnSettingsSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSettingsSave.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnSettingsSave.Location = new System.Drawing.Point(378, 225);
+            this.btnSettingsSave.Name = "btnSettingsSave";
+            this.btnSettingsSave.Size = new System.Drawing.Size(75, 25);
+            this.btnSettingsSave.TabIndex = 6;
+            this.btnSettingsSave.Text = "Save";
+            this.btnSettingsSave.UseVisualStyleBackColor = false;
+            this.btnSettingsSave.Click += new System.EventHandler(this.btnSettingsSave_Click);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(6, 151);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(66, 14);
+            this.label22.TabIndex = 8;
+            this.label22.Text = "[General]";
+            // 
+            // chk_showNsfw
+            // 
+            this.chk_showNsfw.AutoSize = true;
+            this.chk_showNsfw.Location = new System.Drawing.Point(10, 172);
+            this.chk_showNsfw.Name = "chk_showNsfw";
+            this.chk_showNsfw.Size = new System.Drawing.Size(167, 18);
+            this.chk_showNsfw.TabIndex = 0;
+            this.chk_showNsfw.Text = "Display NSFW variants";
+            this.chk_showNsfw.UseVisualStyleBackColor = true;
             // 
             // label11
             // 
@@ -1052,9 +1097,9 @@
             this.label11.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Location = new System.Drawing.Point(234, 107);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(145, 14);
+            this.label11.Size = new System.Drawing.Size(216, 14);
             this.label11.TabIndex = 7;
-            this.label11.Text = "(Upload purposes only)";
+            this.label11.Text = "(For tagging custom variants with)";
             // 
             // label17
             // 
@@ -1142,16 +1187,6 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "GitHub Token:";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(472, 207);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(305, 374);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 12;
-            this.pictureBox1.TabStop = false;
-            // 
             // imgList_icons
             // 
             this.imgList_icons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgList_icons.ImageStream")));
@@ -1200,17 +1235,15 @@
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1256,7 +1289,6 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.CheckBox chkUploadNsfw;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.CheckBox chk_showNsfw;
         private System.Windows.Forms.FlowLayoutPanel flow_deck;
         private System.Windows.Forms.DataGridView dgv_decks;
@@ -1280,17 +1312,16 @@
         private System.Windows.Forms.Label lblCardSelected;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.LinkLabel lnk_studio;
-        private System.Windows.Forms.LinkLabel lnk_github;
+        private System.Windows.Forms.LinkLabel lnk_token;
         private System.Windows.Forms.LinkLabel lnk_netRuntime;
         private System.Windows.Forms.ImageList imgList_icons;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.LinkLabel linkLabel2;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel lnk_discord;
+        private System.Windows.Forms.LinkLabel lnk_github;
         private System.Windows.Forms.Label lblDblClickDeck;
         private System.Windows.Forms.Button btnPullDeck;
         private System.Windows.Forms.RadioButton radDeck;
@@ -1305,5 +1336,10 @@
         private System.Windows.Forms.Label lblInstalledDeck;
         private System.Windows.Forms.Label lblNoDecks;
         private System.Windows.Forms.Button btnRestoreDeck;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label22;
     }
 }
