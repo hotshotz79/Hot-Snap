@@ -5,7 +5,7 @@
 ![GitHub](https://img.shields.io/github/license/hotshotz79/Hot-Snap)
 ![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)
 <br>
-![Discord](https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)
+[<img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white">](https://discord.gg/2YuTMfNt)
 ![Reddit](https://img.shields.io/badge/Reddit-FF4500?style=for-the-badge&logo=reddit&logoColor=white) 
 <!-- Add hyperlink to Discord and Reddit post -->
 ![GitHub-Banner](https://github.com/hotshotz79/Hot-Snap/assets/7006684/a761d74a-be22-4c40-97c6-8d5f09812b30)
@@ -14,8 +14,8 @@
 <p align="center">An app that hot S<s>N</s>WAP's cards with custom variants on PC version of Marvel Snap</p>
 
 <p align="center">
-  <a href="[https://github.com/hotshotz79/NX-Game-Icon-Customizer/releases](https://github.com/hotshotz79/Hot-Snap/releases)">Download</a> | 
-  <a href="https://">Tutorial (Coming Soon)</a> 
+  <a href="https://github.com/hotshotz79/Hot-Snap/releases">Download</a> | 
+  <a href="https://discord.gg/aTw3mYNH3a">Tutorial (Discord)</a> 
 </p>
 
 ____
